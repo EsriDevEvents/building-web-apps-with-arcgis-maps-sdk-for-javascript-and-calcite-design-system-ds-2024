@@ -6,7 +6,7 @@
   <title>2024 Esri Developer Summit - Designing Apps with Calcite Design System</title>
 
   <!-- Calcite imports -->
-  <script type="module" src="https://js.arcgis.com/calcite-components/2.4.0/calcite.esm.js"></script>
+  <script type="module" src="https://js.arcgis.com/calcite-components/2.6.0/calcite.esm.js"></script>
   <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/calcite-components/2.4.0/calcite.css" />
 
   <!-- Demo imports -->
@@ -16,7 +16,7 @@
   <link el="preload" id="jsapi-mode-light" rel="stylesheet"
     href="https://js.arcgis.com/4.29/@arcgis/core/assets/esri/themes/light/main.css" />
   <link el="preload" disabled id="jsapi-mode-dark" rel="stylesheet"
-    href="https://js.arcgis.com/4.29/esri/themes/dark/main.css" />
+    href="https://js.arcgis.com/4.29/@arcgis/core/assets/esri/themes/dark/main.css" />
 
   <script src="https://js.arcgis.com/4.29/"></script>
 
@@ -65,7 +65,6 @@
           </script>
 
   <!-- Our application -->
-  <link rel="stylesheet" href="https://js.arcgis.com/4.29/@arcgis/core/assets/esri/themes/light/main.css">
   <script src="./map.js" type="module"></script>
 
 </head>
@@ -74,7 +73,8 @@
   <calcite-shell>
     <calcite-navigation navigation-action slot="header" id="nav">
       <calcite-navigation-logo href="#" icon="clustering" alt="Application logo" slot="logo"
-        heading="My demo application" description="Esri Developer Summit 2024"></calcite-navigation-logo>
+        heading="Building Web Apps: ArcGIS Maps SDK for JS and Calcite Design System"
+        description="Esri Developer Summit 2024"></calcite-navigation-logo>
       <calcite-action-pad layout="horizontal" expand-disabled slot="content-end">
         <calcite-action id="toggle-mode" text="Toggle mode" icon="brightness"></calcite-action>
         <calcite-action id="toggle-modal" text="About this application" icon="information"></calcite-action>
@@ -87,8 +87,8 @@
     </calcite-navigation>
 
     <calcite-shell-panel slot="panel-start">
-      <calcite-panel heading="Maps SDK for JavaScript" description="Showcased product">
-        <calcite-action-bar slot="action-bar" expand-disabled>
+      <calcite-panel heading="Maps SDK for JS & Caclite" description="Showcased products">
+        <!-- <calcite-action-bar slot="action-bar" expand-disabled>
           <calcite-action-group>
             <calcite-action text="export" icon="export"></calcite-action>
             <calcite-action text="Duplicate" icon="duplicate"></calcite-action>
@@ -100,40 +100,52 @@
             <calcite-action text="Undo" icon="undo"></calcite-action>
             <calcite-action text="Redo" icon="redo"></calcite-action>
           </calcite-action-group>
-        </calcite-action-bar>
+        </calcite-action-bar> -->
 
         <calcite-action id="toggle-instructions" text="Instructions" icon="lightbulb"
           slot="header-actions-end"></calcite-action>
         <calcite-tooltip placement="bottom" reference-element="toggle-instructions" slot="header-actions-end">A quick
           get-going hint about this demo</calcite-tooltip>
-        <calcite-block collapsible heading="Layer effects" description="Adjust blur, highlight, and order">
+        <calcite-block collapsible heading="Layer effects"
+          description="Adjust windmill speed, size, blade size, and direction.">
           <calcite-icon scale="s" slot="icon" icon="effects"></calcite-icon>
-          <calcite-notice open>
-            <div slot="message">Use layer effects sparingly, for emphasis</div>
-          </calcite-notice>
+
+          <calcite-label>
+            Windmill Size
+            <calcite-input-number id="windmill-size" placeholder="Size" step="1" clearable integer max="25" min="1"
+              number-button-type="vertical"></calcite-input-number>
+          </calcite-label>
+
+          <calcite-label>
+            Windmill Blade Size
+            <calcite-input-number id="windmill-blade-size" placeholder="Size" step="1" clearable integer max="25"
+              min="1" number-button-type="vertical"></calcite-input-number>
+          </calcite-label>
+
+          <calcite-label>
+            Wind Speed (km/h)
+            <calcite-slider id="wind-speed" label-handles max="500" min="0"></calcite-slider>
+          </calcite-label>
+
+          <calcite-label>
+            Wind Direction (degrees)
+            <calcite-slider snap step="15" id="wind-direction" value="0" label-handles max="360"></calcite-slider>
+          </calcite-label>
+
+
+
         </calcite-block>
-        <calcite-block collapsible heading="Symbology" description="Select type, color, and transparency">
-          <calcite-icon scale="s" slot="icon" icon="map-pin"></calcite-icon>
+        <calcite-block collapsible heading="Windmills" description="A list of displayed windmills">
+          <calcite-icon scale="s" slot="icon" icon="list"></calcite-icon>
 
-          <calcite-label>
-            Effect type
-            <calcite-segmented-control width="full">
-              <calcite-segmented-control-item value="Blur"></calcite-segmented-control-item>
-              <calcite-segmented-control-item checked value="Highlight"></calcite-segmented-control-item>
-            </calcite-segmented-control>
-          </calcite-label>
 
-          <calcite-label>
-            Something
-            <calcite-input placeholder="A great placeholder"></calcite-input>
-          </calcite-label>
-          <calcite-label>
-            Something numerical<calcite-input-number value="25" placeholder="--" suffix-text="%"
-              alignment="end"></calcite-input-number>
-          </calcite-label>
+
+          <calcite-list selection-mode="single" id="turbine-list">
+
+          </calcite-list>
         </calcite-block>
 
-        <calcite-fab slot="fab"></calcite-fab>
+
 
         <calcite-notice open scale="s" slot="footer">
           <span slot="title">What is being demonstrated?</span>

@@ -27,6 +27,9 @@ function handleModeChange() {
   lightModeCss.disabled = !lightModeCss.disabled;
   toggleModeEl.icon = isDarkMode ? "moon" : "brightness";
   document.body.className = isDarkMode ? "calcite-mode-dark" : undefined;
+  const viewUIEl = document.querySelector("#viewDiv .esri-ui");
+  viewUIEl.classList.toggle("calcite-mode-dark", isDarkMode);
+  viewUIEl.classList.toggle("calcite-mode-light", !isDarkMode);
 }
 
 function handleModalChange() {

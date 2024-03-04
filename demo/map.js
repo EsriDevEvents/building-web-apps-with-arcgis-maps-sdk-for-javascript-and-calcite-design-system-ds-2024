@@ -37,14 +37,24 @@ const inputSR = {
 };
 
 // todo:
-// Maximum number of windmills
-const maxWindmills = 100;
+// make responsive UI
+// loading spinner for data fetching
+// switch for enabling disabling?
 
-// todo:
-// Size of the windmills.
+// list for each windmill? toggle them on and off?
+
+// bookmarks for differnet windmills locations?
+
+// Maximum number of windmills
+let maxWindmills = 100;
+
 // The raw model has a height of ~10.0 units.
-const windmillHeight = 10;
-const windmillBladeSize = 4;
+let windmillHeight = 10; // DEFAULT: 10
+let windmillBladeSize = 4; // DEFAULT: 4
+let customWindmillSize = undefined; // DEFAULT: undefined
+let customWindmillBladeSize = undefined; // DEFAULT: undefined
+let windDirection = undefined; // degrees
+let windSpeed = undefined; // km/h
 
 const map = new Map({
   basemap: "hybrid",
@@ -69,6 +79,8 @@ const view = new SceneView({
   },
 });
 
+window.view = view;
+
 const homeBtn = new Home({
   view: view,
 });
@@ -78,7 +90,6 @@ view.ui.add(homeBtn, "top-left");
 /*******************************************************
  * Query the wind direction (live data)
  ******************************************************/
-// todo:
 const getWindDirection = () => {
   const layerURL =
     "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/weather_stations_010417/FeatureServer/0/query";
@@ -90,8 +101,9 @@ const getWindDirection = () => {
 
   return executeQueryJSON(layerURL, queryObject).then((results) => {
     return {
-      direction: results.features[0].getAttribute("WIND_DIRECT") || 0,
-      speed: results.features[0].getAttribute("WIND_SPEED") || 0,
+      direction:
+        windDirection ?? results.features[0].getAttribute("WIND_DIRECT") ?? 0,
+      speed: windSpeed ?? results.features[0].getAttribute("WIND_SPEED") ?? 0,
     };
   });
 };
@@ -105,8 +117,24 @@ const getWeatherStations = () => {
 
   const queryObject = new Query();
   queryObject.returnGeometry = true;
-  queryObject.outFields = ["tower_h", "blade_l", "POINT_Z"];
+  queryObject.outFields = [
+    "tower_h",
+    "blade_l",
+    "POINT_Z",
+    "unique_id",
+    "site_name",
+    "on_year",
+    "manufac",
+    "model",
+  ];
   queryObject.where = "tower_h > 0";
+  queryObject.geometry = new Extent({
+    spatialReference: { latestWkid: 3857, wkid: 102100 },
+    xmin: -12981949.871392062,
+    ymin: 4016481.072851243,
+    xmax: -12975312.934556061,
+    ymax: 4019327.2268792265,
+  });
   queryObject.outSpatialReference = inputSR;
 
   return executeQueryJSON(layerURL, queryObject).then((results) => {
@@ -117,15 +145,81 @@ const getWeatherStations = () => {
 /***********************************************
  * Install our render node once we have the data
  **********************************************/
-eachAlways([getWindDirection(), getWeatherStations(), view.when()])
-  .then((results) => {
-    const wind = results[0].value;
-    const stations = results[1].value;
-    new WindmillRenderNode({ view, wind, stations });
-  })
-  .catch((error) => {
-    console.log(error);
+let renderNode = null;
+
+function initTurbineRender() {
+  if (renderNode) {
+    renderNode.destroy();
+  }
+
+  eachAlways([getWindDirection(), getWeatherStations(), view.when()])
+    .then((results) => {
+      const wind = results[0].value;
+      const stations = results[1].value;
+      renderWindTurbines(
+        stations.map(({ attributes, geometry }) => ({
+          attributes,
+          geometry,
+        }))
+      );
+      renderNode = new WindmillRenderNode({ view, wind, stations });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+initTurbineRender();
+
+function renderWindTurbines(turbines) {
+  const list = document.getElementById("turbine-list");
+  turbines.forEach((turbine) => {
+    const listItem = document.createElement("calcite-list-item");
+    const { site_name, unique_id, manufac, model, on_year } =
+      turbine.attributes;
+    listItem.label = `${site_name}: ${unique_id}`;
+    listItem.description = `${manufac}: ${model}`;
+    listItem.addEventListener("calciteListItemSelect", () => {
+      view.goTo({
+        target: turbine.geometry,
+      });
+    });
+
+    list.appendChild(listItem);
+
+    const chip = document.createElement("calcite-chip");
+    chip.innerText = on_year;
+    chip.slot = "content-end";
+    listItem.appendChild(chip);
   });
+}
+
+const windSpeedEl = document.getElementById("wind-speed");
+windSpeedEl.addEventListener("calciteSliderChange", function (event) {
+  windSpeed = event.target.value;
+  initTurbineRender();
+});
+
+const windDirectionEl = document.getElementById("wind-direction");
+windDirectionEl.addEventListener("calciteSliderChange", function (event) {
+  windDirection = event.target.value;
+  initTurbineRender();
+});
+
+const windmillSizeEl = document.getElementById("windmill-size");
+windmillSizeEl.addEventListener("calciteInputNumberChange", function (event) {
+  customWindmillSize = event.target.value || undefined;
+  initTurbineRender();
+});
+
+const windmillBladeSizeEl = document.getElementById("windmill-blade-size");
+windmillBladeSizeEl.addEventListener(
+  "calciteInputNumberChange",
+  function (event) {
+    customWindmillBladeSize = event.target.value || undefined;
+    initTurbineRender();
+  }
+);
 
 /********************************
  * Create an external render node
@@ -503,9 +597,10 @@ const WindmillRenderNode = RenderNode.createSubclass({
       this.windmillInstanceWindDirection[i] = (wind.direction / 180) * Math.PI;
 
       // Offset and scale
-      const towerScale = towerHeight / windmillHeight;
+      const towerScale = customWindmillSize ?? towerHeight / windmillHeight;
       this.windmillInstanceTowerScale[i] = towerScale;
-      const bladeScale = bladeLength / windmillBladeSize;
+      const bladeScale =
+        customWindmillBladeSize ?? bladeLength / windmillBladeSize;
       this.windmillInstanceBladeScale[i] = [bladeScale, bladeScale, bladeScale];
       this.windmillInstanceBladeOffset[i] = vec3.create();
       vec3.scale(
