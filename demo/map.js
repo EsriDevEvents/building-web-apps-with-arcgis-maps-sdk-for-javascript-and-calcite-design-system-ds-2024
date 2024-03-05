@@ -206,7 +206,6 @@ function renderWindTurbines(turbines) {
     list.appendChild(listItem);
 
     const chip = document.createElement("calcite-chip");
-    chip.kind = "brand";
     chip.innerText = on_year;
     chip.slot = "content-end";
     listItem.appendChild(chip);
