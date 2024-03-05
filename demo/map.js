@@ -46,12 +46,12 @@ const inputSR = {
 let maxWindmills = 100;
 
 // The raw model has a height of ~10.0 units.
-let windmillHeight = 10; // DEFAULT: 10
-let windmillBladeSize = 4; // DEFAULT: 4
-let customWindmillSize = undefined; // DEFAULT: undefined
-let customWindmillBladeSize = undefined; // DEFAULT: undefined
-let windDirection = undefined; // degrees
-let windSpeed = undefined; // km/h
+let windmillHeight = 10;
+let windmillBladeSize = 4;
+let customWindmillSize = undefined;
+let customWindmillBladeSize = undefined;
+let windDirection = undefined;
+let windSpeed = undefined;
 
 const map = new Map({
   basemap: "hybrid",
@@ -195,7 +195,7 @@ function renderWindTurbines(turbines) {
     const { site_name, unique_id, manufac, model, on_year } =
       turbine.attributes;
     listItem.label = `${site_name}: ${unique_id}`;
-    listItem.description = `${manufac}: ${model}`;
+    listItem.description = `${manufac} - ${model}`;
     listItem.addEventListener("calciteListItemSelect", () => {
       view.goTo({
         target: turbine.geometry,
@@ -206,6 +206,7 @@ function renderWindTurbines(turbines) {
     list.appendChild(listItem);
 
     const chip = document.createElement("calcite-chip");
+    chip.kind = "brand";
     chip.innerText = on_year;
     chip.slot = "content-end";
     listItem.appendChild(chip);
