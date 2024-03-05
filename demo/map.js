@@ -217,7 +217,7 @@ windSpeedEl.addEventListener("calciteSliderChange", function (event) {
 });
 
 const windDirectionEl = document.getElementById("wind-direction");
-windDirectionEl.addEventListener("calciteSliderChange", function (event) {
+windDirectionEl.addEventListener("calciteSelectChange", function (event) {
   windDirection = event.target.value;
   updateWindResetButton();
   initTurbineRenderDebounced();

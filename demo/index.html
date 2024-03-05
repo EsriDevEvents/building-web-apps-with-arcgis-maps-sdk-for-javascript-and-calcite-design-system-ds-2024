@@ -97,11 +97,21 @@
           <calcite-icon scale="s" slot="icon" icon="effects"></calcite-icon>
           <calcite-label>
             Wind Speed (km/h)
-            <calcite-slider id="wind-speed" label-handles max="500" min="0"></calcite-slider>
+            <calcite-slider id="wind-speed" label-handles max="800" min="0"></calcite-slider>
           </calcite-label>
           <calcite-label>
             Wind Direction (degrees)
-            <calcite-slider snap step="15" id="wind-direction" value="0" label-handles max="360"></calcite-slider>
+            <calcite-select id="wind-direction">
+              <calcite-option value="0">0°</calcite-option>
+              <calcite-option value="45">45°</calcite-option>
+              <calcite-option value="90">90°</calcite-option>
+              <calcite-option value="135">135°</calcite-option>
+              <calcite-option value="180">180°</calcite-option>
+              <calcite-option value="225">225°</calcite-option>
+              <calcite-option value="270">270°</calcite-option>
+              <calcite-option value="215">215°</calcite-option>
+              <calcite-option value="360">360°</calcite-option>
+            </calcite-select>
           </calcite-label>
           <calcite-label>
             Windmill Size
