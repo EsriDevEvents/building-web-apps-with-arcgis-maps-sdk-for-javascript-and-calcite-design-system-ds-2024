@@ -19,6 +19,9 @@ import {
   debounce,
 } from "https://js.arcgis.com/4.29/@arcgis/core/core/promiseUtils.js";
 
+// todo: theming
+// todo: code blocks
+
 /*********************
  * Settings
  *********************/
