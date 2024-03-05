@@ -207,6 +207,8 @@ function renderWindTurbines(turbines) {
 
     const chip = document.createElement("calcite-chip");
     chip.innerText = on_year;
+    chip.className = "custom-chip";
+    chip.icon = "calendar";
     chip.slot = "content-end";
     listItem.appendChild(chip);
   });
