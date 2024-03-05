@@ -14,7 +14,10 @@ import {
   mat4,
   vec3,
 } from "https://cdn.jsdelivr.net/npm/gl-matrix@3.4.3/esm/index.js";
-import { eachAlways } from "https://js.arcgis.com/4.29/@arcgis/core/core/promiseUtils.js";
+import {
+  eachAlways,
+  debounce,
+} from "https://js.arcgis.com/4.29/@arcgis/core/core/promiseUtils.js";
 
 /*********************
  * Settings
@@ -35,15 +38,6 @@ const mapExtent = new Extent({
 const inputSR = {
   wkid: 3857,
 };
-
-// todo:
-// make responsive UI
-// loading spinner for data fetching
-// switch for enabling disabling?
-
-// list for each windmill? toggle them on and off?
-
-// bookmarks for differnet windmills locations?
 
 // Maximum number of windmills
 let maxWindmills = 100;
@@ -171,6 +165,8 @@ function initTurbineRender() {
 
 initTurbineRender();
 
+const initTurbineRenderDebounced = debounce(initTurbineRender, 100);
+
 function renderWindTurbines(turbines) {
   const list = document.getElementById("turbine-list");
   turbines.forEach((turbine) => {
@@ -197,19 +193,22 @@ function renderWindTurbines(turbines) {
 const windSpeedEl = document.getElementById("wind-speed");
 windSpeedEl.addEventListener("calciteSliderChange", function (event) {
   windSpeed = event.target.value;
-  initTurbineRender();
+  updateWindResetButton();
+  initTurbineRenderDebounced();
 });
 
 const windDirectionEl = document.getElementById("wind-direction");
 windDirectionEl.addEventListener("calciteSliderChange", function (event) {
   windDirection = event.target.value;
-  initTurbineRender();
+  updateWindResetButton();
+  initTurbineRenderDebounced();
 });
 
 const windmillSizeEl = document.getElementById("windmill-size");
 windmillSizeEl.addEventListener("calciteInputNumberChange", function (event) {
   customWindmillSize = event.target.value || undefined;
-  initTurbineRender();
+  updateWindResetButton();
+  initTurbineRenderDebounced();
 });
 
 const windmillBladeSizeEl = document.getElementById("windmill-blade-size");
@@ -217,9 +216,38 @@ windmillBladeSizeEl.addEventListener(
   "calciteInputNumberChange",
   function (event) {
     customWindmillBladeSize = event.target.value || undefined;
-    initTurbineRender();
+    updateWindResetButton();
+    initTurbineRenderDebounced();
   }
 );
+
+const windResetEl = document.getElementById("wind-reset");
+windResetEl.addEventListener("click", function () {
+  windmillSizeEl.value = undefined;
+  windmillBladeSizeEl.value = undefined;
+
+  windSpeed =
+    windDirection =
+    customWindmillBladeSize =
+    customWindmillSize =
+      undefined;
+
+  updateWindResetButton();
+  initTurbineRenderDebounced();
+});
+
+const updateWindResetButton = () => {
+  if (
+    windSpeed !== undefined ||
+    windDirection !== undefined ||
+    customWindmillBladeSize !== undefined ||
+    customWindmillSize !== undefined
+  ) {
+    windResetEl.disabled = false;
+  } else {
+    windResetEl.disabled = true;
+  }
+};
 
 /********************************
  * Create an external render node
