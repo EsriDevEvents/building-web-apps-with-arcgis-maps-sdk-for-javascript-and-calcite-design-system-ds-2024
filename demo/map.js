@@ -95,9 +95,8 @@ const getWindDirection = () => {
 
   return executeQueryJSON(layerURL, queryObject).then((results) => {
     return {
-      direction:
-        windDirection ?? results.features[0].getAttribute("WIND_DIRECT") ?? 0,
-      speed: windSpeed ?? results.features[0].getAttribute("WIND_SPEED") ?? 0,
+      direction: results.features[0].getAttribute("WIND_DIRECT") ?? 0,
+      speed: results.features[0].getAttribute("WIND_SPEED") ?? 0,
     };
   });
 };
@@ -140,15 +139,32 @@ const getWeatherStations = () => {
  * Install our render node once we have the data
  **********************************************/
 let renderNode = null;
+let renderNodePromise = null;
+
+const weatherStationPromise = getWeatherStations();
+const windDirectionPromise = getWindDirection();
 
 function initTurbineRender() {
   if (renderNode) {
     renderNode.destroy();
+    renderNode = undefined;
   }
 
-  eachAlways([getWindDirection(), getWeatherStations(), view.when()])
+  const promise = eachAlways([
+    windDirectionPromise,
+    weatherStationPromise,
+    view.when(),
+  ])
     .then((results) => {
-      const wind = results[0].value;
+      if (promise !== renderNodePromise) {
+        return;
+      }
+
+      const wind = {
+        direction: windDirection ?? results[0].value.direction,
+        speed: windSpeed ?? results[0].value.speed,
+      };
+
       const stations = results[1].value;
       renderWindTurbines(
         stations.map(({ attributes, geometry }) => ({
@@ -161,14 +177,16 @@ function initTurbineRender() {
     .catch((error) => {
       console.log(error);
     });
+  renderNodePromise = promise;
 }
 
-initTurbineRender();
+const initTurbineRenderDebounced = debounce(() => initTurbineRender(), 100);
 
-const initTurbineRenderDebounced = debounce(initTurbineRender, 100);
+initTurbineRenderDebounced();
 
 function renderWindTurbines(turbines) {
   const list = document.getElementById("turbine-list");
+  list.innerHTML = "";
   turbines.forEach((turbine) => {
     const listItem = document.createElement("calcite-list-item");
     const { site_name, unique_id, manufac, model, on_year } =
@@ -178,6 +196,7 @@ function renderWindTurbines(turbines) {
     listItem.addEventListener("calciteListItemSelect", () => {
       view.goTo({
         target: turbine.geometry,
+        scale: 1500,
       });
     });
 
@@ -223,6 +242,8 @@ windmillBladeSizeEl.addEventListener(
 
 const windResetEl = document.getElementById("wind-reset");
 windResetEl.addEventListener("click", function () {
+  windSpeedEl.value = 0;
+  windDirectionEl.value = 0;
   windmillSizeEl.value = undefined;
   windmillBladeSizeEl.value = undefined;
 

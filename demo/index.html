@@ -96,6 +96,14 @@
           description="Adjust windmill speed, size, blade size, and direction.">
           <calcite-icon scale="s" slot="icon" icon="effects"></calcite-icon>
           <calcite-label>
+            Wind Speed (km/h)
+            <calcite-slider id="wind-speed" label-handles max="500" min="0"></calcite-slider>
+          </calcite-label>
+          <calcite-label>
+            Wind Direction (degrees)
+            <calcite-slider snap step="15" id="wind-direction" value="0" label-handles max="360"></calcite-slider>
+          </calcite-label>
+          <calcite-label>
             Windmill Size
             <calcite-input-number id="windmill-size" placeholder="Size" step="1" clearable integer max="25" min="1"
               number-button-type="vertical"></calcite-input-number>
@@ -104,14 +112,6 @@
             Windmill Blade Size
             <calcite-input-number id="windmill-blade-size" placeholder="Size" step="1" clearable integer max="25"
               min="1" number-button-type="vertical"></calcite-input-number>
-          </calcite-label>
-          <calcite-label>
-            Wind Speed (km/h)
-            <calcite-slider id="wind-speed" label-handles max="500" min="0"></calcite-slider>
-          </calcite-label>
-          <calcite-label>
-            Wind Direction (degrees)
-            <calcite-slider snap step="15" id="wind-direction" value="0" label-handles max="360"></calcite-slider>
           </calcite-label>
           <calcite-label>
             <calcite-button disabled id="wind-reset" appearance="outline-fill" kind="neutral">Reset</calcite-button>
