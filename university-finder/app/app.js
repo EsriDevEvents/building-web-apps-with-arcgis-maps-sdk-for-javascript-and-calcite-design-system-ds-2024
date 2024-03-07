@@ -95,7 +95,7 @@ async function init() {
     if (!detailPanelNode) {
       const flowItem = document.createElement("calcite-flow-item");
       flowItem.heading = handleCasing(attributes["NAME"]);
-      flowItem.summary = `${handleCasing(attributes["CITY"])}, ${
+      flowItem.description = `${handleCasing(attributes["CITY"])}, ${
         attributes["STATE"]
       }`;
       flowItem.id = "detail-panel";
@@ -157,7 +157,7 @@ async function init() {
       }
 
       const notice = document.createElement("calcite-notice");
-      notice.active = true;
+      notice.open = true;
       notice.width = "full";
 
       const message = document.createElement("span");
@@ -285,7 +285,7 @@ async function init() {
     } else {
       /* replace existing element content */
       detailPanelNode.heading = handleCasing(attributes["NAME"]);
-      detailPanelNode.summary = `${handleCasing(attributes["CITY"])}, ${
+      detailPanelNode.description = `${handleCasing(attributes["CITY"])}, ${
         attributes["STATE"]
       }`;
 
@@ -452,7 +452,7 @@ async function init() {
 
   function displayNoResult() {
     const notice = document.createElement("calcite-notice");
-    notice.active = true;
+    notice.open = true;
     notice.width = "full";
 
     const message = document.createElement("span");
@@ -495,12 +495,12 @@ async function init() {
     title.slot = "title";
     title.innerText = handleCasing(attributes["NAME"]);
 
-    const summary = document.createElement("span");
-    summary.slot = "subtitle";
-    summary.innerText = handleCasing(attributes["NAICS_DESC"]);
+    const subtitle = document.createElement("span");
+    subtitle.slot = "subtitle";
+    subtitle.innerText = handleCasing(attributes["NAICS_DESC"]);
 
     item.appendChild(title);
-    item.appendChild(summary);
+    item.appendChild(subtitle);
 
     itemButton.addEventListener("click", () =>
       resultClickHandler(result.attributes[collegeLayer.objectIdField])
@@ -554,7 +554,7 @@ async function init() {
 
     resultBlockNode.loading = false;
 
-    resultBlockNode.summary = `${appState.count} universities found within the map.`;
+    resultBlockNode.description = `${appState.count} universities found within the map.`;
 
     resultsNode.innerHTML = "";
     if (results.features.length) {

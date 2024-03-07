@@ -1,4 +1,4 @@
-body {
+.calcite-presentation {
   scrollbar-color: var(--calcite-ui-brand) var(--calcite-color-border-3);
 }
 
@@ -10,6 +10,7 @@ body {
   padding: 0;
 }
 
+/* todo: make resizable */
 #viewDiv {
   margin-left: 340px;
   border-top: 1px solid var(--calcite-color-border-3);
@@ -33,6 +34,7 @@ body {
   max-width: 100%;
 }
 
+/* todo: make resizable */
 #custom-panel {
   --calcite-panel-max-width: 340px;
   --calcite-panel-min-width: 340px;
@@ -41,7 +43,7 @@ body {
 }
 
 calcite-slider {
-  max-width: 96%;
+  max-width: 90%;
 }
 
 calcite-card {
@@ -55,19 +57,20 @@ calcite-pagination {
   justify-content: center;
 }
 
-body {
+.calcite-presentation {
   --calcite-ui-brand: purple;
   --calcite-color-brand: purple;
   --calcite-color-brand-hover: rgb(94, 0, 94);
   --calcite-color-brand-press: rgb(87, 0, 87);
 }
 
-body.calcite-mode-dark {
+.calcite-mode-dark .calcite-presentation {
   --calcite-color-brand: rgb(125, 0, 209);
   --calcite-color-brand-hover: rgb(121, 0, 205);
   --calcite-color-brand-press: rgb(141, 0, 225);
 }
 
+/* todo: use calcite table */
 calcite-label span {
   font-weight: 500;
   text-align: end;
@@ -83,6 +86,7 @@ calcite-label span {
   background: transparent;
 }
 
+/* todo: calcite-menu */
 .temporary-header {
   padding: 0.75rem;
   font-size: 20px;
@@ -94,49 +98,32 @@ calcite-label span {
   justify-content: space-between;
 }
 
+/* todo: calcite-menu */
 .calcite-mode-dark .temporary-header {
   color: var(--calcite-color-text-1);
   --calcite-ui-icon-color: var(--calcite-color-text-1);
 }
 
+/* todo: remove */
 calcite-action-pad {
   margin-inline-start: auto;
 }
+
+/* todo: remove */
 .temporary-header calcite-icon {
   margin-inline-end: 1rem;
 }
 
-/* styling for detail chips */
-calcite-block calcite-chip {
-  margin-inline-end: 0.5rem;
-  margin-block-start: 0.5rem;
-}
-
-calcite-block calcite-notice {
+.calcite-block-contents calcite-notice {
   margin-block-end: 1rem;
 }
-/* styling for chip select */
-#programType calcite-chip {
-  margin-inline-end: 0.5rem;
-  margin-block-start: 0.5rem;
-  cursor: pointer;
-  box-shadow: 0 0 0 2px transparent 0 0 0 4px transparent;
-  transition: box-shadow 0.15s ease-in-out;
-  --calcite-ui-info: var(--calcite-ui-brand);
-}
 
-#programType calcite-chip:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--calcite-ui-foreground-1),
-    0 0 0 4px var(--calcite-ui-brand);
+#programType calcite-chip {
+  cursor: pointer;
 }
 
 .calcite-panel-contents {
   overflow-y: auto;
   display: block;
-  height: 100vh;
-}
-
-.calcite-block-contents {
-  width: calc(100% - 0.75rem);
+  height: 100%;
 }

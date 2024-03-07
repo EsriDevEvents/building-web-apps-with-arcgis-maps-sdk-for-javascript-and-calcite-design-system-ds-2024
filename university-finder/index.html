@@ -29,7 +29,7 @@
         <calcite-action id="themeToggle" text="Light" icon="brightness"></calcite-action>
       </calcite-action-pad>
     </div>
-    <calcite-shell-panel slot="panel-start" width-scale="l" id="custom-panel">
+    <calcite-shell-panel slot="panel-start" id="custom-panel" resizable>
       <calcite-flow id="flow">
         <calcite-flow-item heading="Results" id="resultBlock" loading>
           <calcite-pagination id="pagination" slot="footer">
@@ -46,7 +46,7 @@
       </div>
     </calcite-shell-center-row>
     <calcite-shell-panel id="filters" slot="panel-end" display-mode="float" height-scale="m">
-      <calcite-panel heading="Filters">
+      <calcite-panel heading="Filters" collapsible>
         <calcite-action id="reset" icon="reset" slot="header-actions-end" hidden></calcite-action>
         <calcite-block heading="Basics" open>
           <calcite-label>
@@ -57,7 +57,8 @@
           </calcite-label>
           <calcite-label>
             Highest degree offered
-            <div id="programType"></div>
+            <calcite-chip-group scale="s" label="Program type" id="programType"></calcite-chip-group>
+            <div></div>
           </calcite-label>
           <calcite-label>
             Enrollment range
