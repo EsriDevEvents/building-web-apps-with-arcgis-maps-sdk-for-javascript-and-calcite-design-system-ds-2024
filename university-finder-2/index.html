@@ -50,11 +50,11 @@
     </calcite-navigation>
 
     <calcite-shell class="calcite-presentation example-shell" content-behind id="example-shell">
-      <div class="temporary-header" slot="header">
-        <calcite-icon icon="education" scale="l"></calcite-icon>
-        UniversityFinder
-      </div>
-      <calcite-shell-panel slot="panel-start" id="custom-panel" resizable>
+      <calcite-navigation class="university-nav" slot="header">
+        <calcite-navigation-logo slot="logo" icon="education" heading="UniversityFinder">
+        </calcite-navigation-logo>
+      </calcite-navigation>
+      <calcite-shell-panel slot="panel-start" id="custom-panel">
         <calcite-flow id="flow">
           <calcite-flow-item heading="Results" id="resultBlock" loading>
             <calcite-pagination id="pagination" slot="footer">

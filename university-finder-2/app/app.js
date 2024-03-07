@@ -156,20 +156,6 @@ async function init() {
         flowItem.appendChild(itemWebsite);
       }
 
-      const notice = document.createElement("calcite-notice");
-      notice.open = true;
-      notice.width = "full";
-
-      const message = document.createElement("span");
-      message.id = "overview-text";
-      message.slot = "message";
-      message.innerText = attributes["overview"]
-        ? attributes["overview"]
-        : "No overview available";
-
-      notice.appendChild(message);
-      blockOne.appendChild(notice);
-
       if (attributes["schoolType"]) {
         const label = document.createElement("calcite-label");
         label.layout = "inline-space-between";
@@ -292,12 +278,6 @@ async function init() {
       document.getElementById(
         "detail-website-link"
       ).href = `http://${attributes["WEBSITE"]}`;
-
-      document.getElementById("overview-text").innerText = attributes[
-        "overview"
-      ]
-        ? attributes["overview"]
-        : "No overview available";
 
       document.getElementById(
         "detail-type"
