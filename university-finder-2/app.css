@@ -95,23 +95,13 @@ calcite-label span {
   align-items: center;
   color: var(--calcite-color-brand);
   background-color: var(--calcite-color-background);
-  justify-content: space-between;
+  justify-content: start;
 }
 
 /* todo: calcite-menu */
 .calcite-mode-dark .temporary-header {
   color: var(--calcite-color-text-1);
   --calcite-ui-icon-color: var(--calcite-color-text-1);
-}
-
-/* todo: remove */
-calcite-action-pad {
-  margin-inline-start: auto;
-}
-
-/* todo: remove */
-.temporary-header calcite-icon {
-  margin-inline-end: 1rem;
 }
 
 .calcite-block-contents calcite-notice {

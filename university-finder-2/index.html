@@ -1,0 +1,146 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>2024 Esri Developer Summit - UniversityFinder</title>
+
+  <!-- Calcite imports -->
+  <script type="module" src="https://js.arcgis.com/calcite-components/2.6.0/calcite.esm.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/calcite-components/2.6.0/calcite.css" />
+
+  <!-- ArcGIS Maps SDK for JavaScript imports -->
+  <link id="jsapi-mode-light" rel="stylesheet"
+    href="https://js.arcgis.com/4.29/@arcgis/core/assets/esri/themes/light/main.css">
+  <link disabled id="jsapi-mode-dark" rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/dark/main.css" />
+
+  <!-- Demo imports -->
+  <script src="./demo.js" defer></script>
+  <link rel="stylesheet" href="./demo.css" />
+
+  <!-- App-->
+  <link rel="stylesheet" href="./app.css" />
+  <script type="module" src="./app.js"></script>
+</head>
+
+<body>
+  <calcite-shell id="root-shell">
+    <calcite-navigation navigation-action slot="header" id="nav">
+      <calcite-navigation-logo href="" icon="footprint" alt="Application logo" slot="logo"
+        heading="UniversityFinder Demo" description="Esri Developer Summit 2024"></calcite-navigation-logo>
+      <calcite-action-pad layout="horizontal" expand-disabled slot="content-end">
+        <calcite-action id="themeToggle" text="Light" icon="brightness"></calcite-action>
+        <calcite-action id="toggle-modal" text="About this application" icon="information"></calcite-action>
+      </calcite-action-pad>
+      <calcite-tooltip placement="bottom" reference-element="toggle-modal" close-on-click slot="content-end">About this
+        application</calcite-tooltip>
+    </calcite-navigation>
+
+    <calcite-shell class="calcite-presentation example-shell" content-behind id="example-shell">
+      <div class="temporary-header" slot="header">
+        <calcite-icon icon="education" scale="l"></calcite-icon>
+        UniversityFinder
+      </div>
+      <calcite-shell-panel slot="panel-start" id="custom-panel" resizable>
+        <calcite-flow id="flow">
+          <calcite-flow-item heading="Results" id="resultBlock" loading>
+            <calcite-pagination id="pagination" slot="footer">
+            </calcite-pagination>
+            <div class="calcite-panel-contents">
+              <calcite-block open id="results">
+              </calcite-block>
+            </div>
+          </calcite-flow-item>
+        </calcite-flow>
+      </calcite-shell-panel>
+      <calcite-shell-center-row height-scale="l">
+        <div id="viewDiv">
+        </div>
+      </calcite-shell-center-row>
+      <calcite-shell-panel id="filters" slot="panel-end" display-mode="float" height-scale="m">
+        <calcite-panel heading="Filters" collapsible>
+          <calcite-action id="reset" icon="reset" slot="header-actions-end" hidden></calcite-action>
+          <calcite-block heading="Basics" open>
+            <calcite-label>
+              School type
+              <calcite-select id="schoolType">
+                <calcite-option value="all">All</calcite-option>
+              </calcite-select>
+            </calcite-label>
+            <calcite-label>
+              Highest degree offered
+              <calcite-chip-group scale="s" label="Program type" id="programType"></calcite-chip-group>
+              <div></div>
+            </calcite-label>
+            <calcite-label>
+              Enrollment range
+              <calcite-slider id="attendance" range label-handles min-value="0" max-value="160000" min="0" max="160000"
+                step="100">
+              </calcite-slider>
+            </calcite-label>
+          </calcite-block>
+          <calcite-block heading="Housing" open>
+            <calcite-block-section id="housingSection" text="Offers on campus housing" toggle-display="switch">
+              <calcite-label>
+                Dormitory capacity
+                <calcite-slider id="housing" range label-handles min-value="0" max-value="20000" min="0" max="20000"
+                  step="100">
+                </calcite-slider>
+              </calcite-label>
+            </calcite-block-section>
+          </calcite-block>
+        </calcite-panel>
+      </calcite-shell-panel>
+    </calcite-shell>
+  </calcite-shell>
+
+  <!-- Demo template interactive elements -->
+  <calcite-modal id="modal">
+    <div slot="header">About this application</div>
+    <div slot="content">
+      <calcite-notice open>
+        <span slot="title">This demonstration application is a companion resource to the "My demo application" session
+          at Esri Developer Summit 2024.
+        </span>
+      </calcite-notice>
+      This example illustrates <calcite-link target="_blank" href=""> a great topic</calcite-link>.
+      <ul>
+        <li>Main point 1.</li>
+        <li>Main point 2.</li>
+        <li>Main point 3.</li>
+      </ul>
+      <calcite-link target="_blank" href="">Learn more</calcite-link> in the
+      <calcite-link target="_blank" href=""> documentation</calcite-link>.
+      <hr />
+      <calcite-link target="_blank" href="">Application source code</calcite-link> is available in the
+      <calcite-link target="_blank" href="https://github.com/EsriDevEvents/">Esri Developer Events GitHub
+        organization</calcite-link>.
+      <hr />
+      <calcite-link target="_blank" href="">Map data </calcite-link> is sourced from Esri Data and Maps /
+      <calcite-link target="_blank" href="https://livingatlas.arcgis.com/en/home/">ArcGIS Living Atlas of the
+        World</calcite-link>.
+    </div>
+  </calcite-modal>
+
+  <calcite-sheet id="sheet" display-mode="float" width-scale="m">
+    <calcite-panel heading="Esri Developer Summit 2024" description="Helpful conference links" closable
+      id="sheet-panel">
+      <calcite-menu layout="vertical" label="2024 Developer Summit Menu">
+        <calcite-menu-item text="2024 Developer Summit Overview" icon-end="launch"
+          href="https://www.esri.com/en-us/about/events/devsummit/overview" target="_blank"></calcite-menu-item>
+        <calcite-menu-item text="Esri Developer Events GitHub" icon-end="launch" href="https://github.com/EsriDevEvents"
+          target="_blank"></calcite-menu-item>
+        <calcite-menu-item text="Esri.com" icon-end="launch" href="https://esri.com"
+          target="_blank"></calcite-menu-item>
+      </calcite-menu>
+      <calcite-notice open slot="footer" width="full" scale="s">
+        <span slot="title">Note</span>
+        <span slot="message">This is a demonstration application showcasing platform functionality. While Esri strives
+          to ensure the sample is accurate, it
+          may not reflect implementation behavior in certain environments.</span>
+      </calcite-notice>
+    </calcite-panel>
+  </calcite-sheet>
+</body>
+
+</html>

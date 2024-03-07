@@ -13,6 +13,7 @@ import { appState } from "./state.js";
 
 async function init() {
   // query for elements
+  const rootShellNode = document.getElementById("root-shell");
   const resultsNode = document.getElementById("results");
   const attendanceNode = document.getElementById("attendance");
   const housingSectionNode = document.getElementById("housingSection");
@@ -25,8 +26,7 @@ async function init() {
   const resetNode = document.getElementById("reset");
   const flowNode = document.getElementById("flow");
   const themeNode = document.getElementById("themeToggle");
-  const darkThemeCss = document.getElementById("jsapi-theme-dark");
-  const lightThemeCss = document.getElementById("jsapi-theme-light");
+  const darkModeCSS = document.getElementById("jsapi-mode-dark");
 
   async function getAttachment(objectId, result) {
     const campusImageContainerNode = document.getElementById(
@@ -744,17 +744,17 @@ async function init() {
   function handleThemeChange() {
     appState.activeItem = true;
     appState.theme = appState.theme === "dark" ? "light" : "dark";
-    darkThemeCss.disabled = !darkThemeCss.disabled;
+    darkModeCSS.disabled = !darkModeCSS.disabled;
     if (appState.theme === "dark") {
       // Clear the basemap, and use the firefly tile layer
       map.basemap = null;
       fireflyBasemap.visible = true;
-      document.body.className = "calcite-mode-dark";
+      rootShellNode.classList.add("calcite-mode-dark");
       themeNode.icon = "moon";
     } else {
       fireflyBasemap.visible = false; // Change firefly visibility for light mode
       map.basemap = "gray-vector";
-      document.body.className = "";
+      rootShellNode.classList.remove("calcite-mode-dark");
       themeNode.icon = "brightness";
     }
     setTimeout(() => {
