@@ -336,6 +336,7 @@ async function init() {
         attributes["TELEPHONE"] ? attributes["TELEPHONE"] : "N/A"
       }`;
     }
+
     view.goTo(
       {
         center: [result.geometry.longitude, result.geometry.latitude],
@@ -584,6 +585,7 @@ async function init() {
     url: "https://fly.maptiles.arcgis.com/arcgis/rest/services/World_Imagery_Firefly/MapServer",
   });
   map.add(fireflyBasemap);
+
   // Turn off visibility for light mode
   fireflyBasemap.visible = false;
 
@@ -662,35 +664,42 @@ async function init() {
   attendanceNode.max = appConfig.attendance.max;
   attendanceNode.minValue = appConfig.attendance.min;
   attendanceNode.maxValue = appConfig.attendance.max;
+
   attendanceNode.addEventListener("calciteSliderInput", (event) => {
     appState.attendance.min = event.target.minValue;
     appState.attendance.max = event.target.maxValue;
     appState.hasFilterChanges = true;
     filterMap();
   });
+
   attendanceNode.addEventListener("calciteSliderChange", (event) => {
     appState.attendance.min = event.target.minValue;
     appState.attendance.max = event.target.maxValue;
     appState.hasFilterChanges = true;
     queryItems();
   });
+
   // Housing
   housingSectionNode.open = appConfig.housing.enabled;
+
   housingSectionNode.addEventListener("calciteBlockSectionToggle", (event) => {
     appState.housing.enabled = event.target.open;
     appState.hasFilterChanges = true;
     queryItems();
   });
+
   housingNode.min = appConfig.housing.min;
   housingNode.max = appConfig.housing.max;
   housingNode.minValue = appConfig.housing.min;
   housingNode.maxValue = appConfig.housing.max;
+
   housingNode.addEventListener("calciteSliderInput", (event) => {
     appState.housing.min = event.target.minValue;
     appState.housing.max = event.target.maxValue;
     appState.hasFilterChanges = true;
     filterMap();
   });
+
   housingNode.addEventListener("calciteSliderChange", (event) => {
     appState.housing.min = event.target.minValue;
     appState.housing.max = event.target.maxValue;
