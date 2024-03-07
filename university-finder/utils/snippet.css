@@ -1,0 +1,57 @@
+:root {
+  --code-height: 80%;
+  --code-width: 70%;
+  --code-width-close: -70%;
+}
+
+#code-snippet {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  z-index: 99;
+  width: var(--code-width);
+  margin-left: var(--code-width-close);
+  font-size: 1.35em;
+  overflow-y: scroll;
+  max-height: var(--code-height);
+}
+
+#code-snippet pre.pre-lang {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.icon-snippet:before {
+  content: "</>";
+}
+
+#code-page {
+  background: var(--calcite-ui-foreground-2);
+  color: var(--calcite-ui-text-3);
+  padding: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  display: flex;
+}
+
+#code-page span {
+  flex: 1;
+}
+
+#code-prev {
+  justify-self: flex-start;
+}
+
+#code-next {
+  justify-self: flex-end;
+}
+
+.code-container {
+  position: relative;
+}

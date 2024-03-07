@@ -1,0 +1,147 @@
+#campusViewDiv,
+#viewDiv {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#viewDiv {
+  margin-left: 340px;
+  border-top: 1px solid var(--calcite-color-border-3);
+}
+
+#campusViewDiv {
+  pointer-events: none;
+  height: 200px;
+}
+
+.campus-image-container {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  background-color: var(--calcite-ui-background);
+  text-align: center;
+  height: 200px;
+}
+
+.campus-image-container img {
+  height: 200px;
+  max-width: 100%;
+}
+
+#custom-panel {
+  --calcite-panel-max-width: 340px;
+  --calcite-panel-min-width: 340px;
+  --calcite-shell-panel-max-width: 340px;
+  --calcite-shell-panel-min-width: 340px;
+}
+
+calcite-slider {
+  max-width: 96%;
+}
+
+calcite-card {
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  text-align: start;
+}
+
+calcite-pagination {
+  flex: 1;
+  justify-content: center;
+}
+
+body {
+  --calcite-ui-brand: purple;
+  --calcite-color-brand: purple;
+  --calcite-color-brand-hover: rgb(94, 0, 94);
+  --calcite-color-brand-press: rgb(87, 0, 87);
+}
+
+body.calcite-mode-dark {
+  --calcite-color-brand: rgb(125, 0, 209);
+  --calcite-color-brand-hover: rgb(121, 0, 205);
+  --calcite-color-brand-press: rgb(141, 0, 225);
+}
+
+calcite-label span {
+  font-weight: 500;
+  text-align: end;
+  max-width: 60%;
+}
+
+.item-button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: block;
+  width: 100%;
+  background: transparent;
+}
+
+.temporary-header {
+  padding: 0.75rem;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  color: var(--calcite-color-brand);
+  background-color: var(--calcite-color-background);
+  justify-content: space-between;
+}
+
+.calcite-mode-dark .temporary-header {
+  color: var(--calcite-color-text-1);
+  --calcite-ui-icon-color: var(--calcite-color-text-1);
+}
+
+calcite-action-pad {
+  margin-inline-start: auto;
+}
+.temporary-header calcite-icon {
+  margin-inline-end: 1rem;
+}
+
+/* styling for detail chips */
+calcite-block calcite-chip {
+  margin-inline-end: 0.5rem;
+  margin-block-start: 0.5rem;
+}
+
+calcite-block calcite-notice {
+  margin-block-end: 1rem;
+}
+/* styling for chip select */
+#programType calcite-chip {
+  margin-inline-end: 0.5rem;
+  margin-block-start: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px transparent 0 0 0 4px transparent;
+  transition: box-shadow 0.15s ease-in-out;
+  --calcite-ui-info: var(--calcite-ui-brand);
+}
+
+#programType calcite-chip:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--calcite-ui-foreground-1),
+    0 0 0 4px var(--calcite-ui-brand);
+}
+
+.calcite-panel-contents {
+  overflow-y: auto;
+  display: block;
+  height: 100vh;
+}
+
+.calcite-block-contents {
+  width: calc(100% - 0.75rem);
+}
+
+::-webkit-scrollbar {
+  width: 0.75rem;
+  height: 8px;
+  background-color: var(--calcite-color-border-3);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--calcite-ui-brand);
+}
