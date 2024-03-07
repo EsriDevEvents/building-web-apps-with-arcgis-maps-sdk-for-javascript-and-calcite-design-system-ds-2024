@@ -15,20 +15,21 @@
   <link disabled id="jsapi-mode-dark" rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/dark/main.css" />
 
   <!-- Demo imports -->
-  <script src="./demo.js" defer></script>
-  <link rel="stylesheet" href="./demo.css" />
+  <script src="./demo/demo.js" defer></script>
+  <link rel="stylesheet" href="./demo/demo.css" />
 
   <!-- App-->
-  <link rel="stylesheet" href="./app.css" />
-  <script type="module" src="./app.js"></script>
+  <link rel="stylesheet" href="./app/app.css" />
+  <script type="module" src="./app/app.js"></script>
 </head>
 
 <body>
   <calcite-shell id="root-shell">
-    <calcite-navigation navigation-action slot="header" id="nav">
-      <calcite-navigation-logo href="" icon="footprint" alt="Application logo" slot="logo"
+    <calcite-navigation slot="header" id="nav">
+      <calcite-navigation-logo id="demo-nav" href="#" icon="footprint" alt="Application logo" slot="logo"
         heading="UniversityFinder Demo" description="Esri Developer Summit 2024"></calcite-navigation-logo>
-      <calcite-action-pad layout="horizontal" expand-disabled slot="content-end">
+      <calcite-action-pad id="demo-actions" layout="horizontal" expand-disabled slot="content-end">
+        <calcite-action id="codetoggle" text="Code" icon="code"></calcite-action>
         <calcite-action id="themeToggle" text="Light" icon="brightness"></calcite-action>
         <calcite-action id="toggle-modal" text="About this application" icon="information"></calcite-action>
       </calcite-action-pad>
@@ -121,26 +122,6 @@
         World</calcite-link>.
     </div>
   </calcite-modal>
-
-  <calcite-sheet id="sheet" display-mode="float" width-scale="m">
-    <calcite-panel heading="Esri Developer Summit 2024" description="Helpful conference links" closable
-      id="sheet-panel">
-      <calcite-menu layout="vertical" label="2024 Developer Summit Menu">
-        <calcite-menu-item text="2024 Developer Summit Overview" icon-end="launch"
-          href="https://www.esri.com/en-us/about/events/devsummit/overview" target="_blank"></calcite-menu-item>
-        <calcite-menu-item text="Esri Developer Events GitHub" icon-end="launch" href="https://github.com/EsriDevEvents"
-          target="_blank"></calcite-menu-item>
-        <calcite-menu-item text="Esri.com" icon-end="launch" href="https://esri.com"
-          target="_blank"></calcite-menu-item>
-      </calcite-menu>
-      <calcite-notice open slot="footer" width="full" scale="s">
-        <span slot="title">Note</span>
-        <span slot="message">This is a demonstration application showcasing platform functionality. While Esri strives
-          to ensure the sample is accurate, it
-          may not reflect implementation behavior in certain environments.</span>
-      </calcite-notice>
-    </calcite-panel>
-  </calcite-sheet>
 </body>
 
 </html>
