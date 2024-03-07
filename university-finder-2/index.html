@@ -17,6 +17,7 @@
   <!-- Demo imports -->
   <script src="./demo/demo.js" defer></script>
   <link rel="stylesheet" href="./demo/demo.css" />
+  <script type="module" src="../esri-devsummit/esri-devsummit.esm.js"></script>
 
   <!-- App-->
   <link rel="stylesheet" href="./app/app.css" />
@@ -28,13 +29,24 @@
     <calcite-navigation slot="header" id="nav">
       <calcite-navigation-logo id="demo-nav" href="#" icon="footprint" alt="Application logo" slot="logo"
         heading="UniversityFinder Demo" description="Esri Developer Summit 2024"></calcite-navigation-logo>
+      <calcite-menu slot="content-end">
+        <calcite-menu-item active icon-start="number-circle-1-f" text="Layout">
+        </calcite-menu-item>
+        <calcite-menu-item href="#" icon-start="number-circle-2" text="Content">
+        </calcite-menu-item>
+        <calcite-menu-item href="#" icon-start="number-circle-3" text="Interaction">
+        </calcite-menu-item>
+        <calcite-menu-item href="#" icon-start="number-circle-4" text="Theming">
+        </calcite-menu-item>
+      </calcite-menu>
       <calcite-action-pad id="demo-actions" layout="horizontal" expand-disabled slot="content-end">
-        <calcite-action id="codetoggle" text="Code" icon="code"></calcite-action>
-        <calcite-action id="themeToggle" text="Light" icon="brightness"></calcite-action>
-        <calcite-action id="toggle-modal" text="About this application" icon="information"></calcite-action>
+        <calcite-action id="toggle-modal" text="Code" icon="code"></calcite-action>
+        <calcite-action id="toggle-mode" text="Light" icon="brightness"></calcite-action>
       </calcite-action-pad>
-      <calcite-tooltip placement="bottom" reference-element="toggle-modal" close-on-click slot="content-end">About this
-        application</calcite-tooltip>
+      <calcite-tooltip placement="bottom" reference-element="toggle-mode" close-on-click slot="content-end">Toggle
+        between light and dark mode</calcite-tooltip>
+      <calcite-tooltip placement="bottom" reference-element="toggle-modal" close-on-click slot="content-end">View code
+        for this step</calcite-tooltip>
     </calcite-navigation>
 
     <calcite-shell class="calcite-presentation example-shell" content-behind id="example-shell">
@@ -97,29 +109,34 @@
 
   <!-- Demo template interactive elements -->
   <calcite-modal id="modal">
-    <div slot="header">About this application</div>
+    <div slot="header">Code Steps</div>
     <div slot="content">
-      <calcite-notice open>
-        <span slot="title">This demonstration application is a companion resource to the "My demo application" session
-          at Esri Developer Summit 2024.
-        </span>
-      </calcite-notice>
-      This example illustrates <calcite-link target="_blank" href=""> a great topic</calcite-link>.
-      <ul>
-        <li>Main point 1.</li>
-        <li>Main point 2.</li>
-        <li>Main point 3.</li>
-      </ul>
-      <calcite-link target="_blank" href="">Learn more</calcite-link> in the
-      <calcite-link target="_blank" href=""> documentation</calcite-link>.
-      <hr />
-      <calcite-link target="_blank" href="">Application source code</calcite-link> is available in the
-      <calcite-link target="_blank" href="https://github.com/EsriDevEvents/">Esri Developer Events GitHub
-        organization</calcite-link>.
-      <hr />
-      <calcite-link target="_blank" href="">Map data </calcite-link> is sourced from Esri Data and Maps /
-      <calcite-link target="_blank" href="https://livingatlas.arcgis.com/en/home/">ArcGIS Living Atlas of the
-        World</calcite-link>.
+      <calcite-accordion scale="l" open collapsible selection-mode="single">
+        <calcite-accordion-item expanded icon-start="code" heading="1. Add Calcite Component">
+          <strong>Create a <calcite-chip appearance="outline-fill">List Item</calcite-chip> for each corridor
+            type.</strong>
+          <esri-devsummit-code source="function createCorridorListItems() {
+  corridors.forEach(item => {
+    const listItem = document.createElement('calcite-list-item');
+    listItem.label=item;
+    listItem.selected = item === appState.corridors;
+    corridorListEl.append(listItem);
+  });
+}"></esri-devsummit-code>
+        </calcite-accordion-item>
+        <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component">
+          <strong>Create a <calcite-chip appearance="outline-fill">List Item</calcite-chip> for each corridor
+            type.</strong>
+          <esri-devsummit-code source="function createCorridorListItems() {
+  corridors.forEach(item => {
+    const listItem = document.createElement('calcite-list-item');
+    listItem.label=item;
+    listItem.selected = item === appState.corridors;
+    corridorListEl.append(listItem);
+  });
+}"></esri-devsummit-code>
+        </calcite-accordion-item>
+      </calcite-accordion>
     </div>
   </calcite-modal>
 </body>

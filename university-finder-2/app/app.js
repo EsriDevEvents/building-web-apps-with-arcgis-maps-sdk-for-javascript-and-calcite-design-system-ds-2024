@@ -25,7 +25,7 @@ async function init() {
   const filtersNode = document.getElementById("filters");
   const resetNode = document.getElementById("reset");
   const flowNode = document.getElementById("flow");
-  const themeNode = document.getElementById("themeToggle");
+  const themeNode = document.getElementById("toggle-mode");
   const darkModeCSS = document.getElementById("jsapi-mode-dark");
 
   async function getAttachment(objectId, result) {
