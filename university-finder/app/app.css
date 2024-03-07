@@ -1,3 +1,7 @@
+body {
+  scrollbar-color: var(--calcite-ui-brand) var(--calcite-color-border-3);
+}
+
 #campusViewDiv,
 #viewDiv {
   height: 100%;
@@ -135,13 +139,4 @@ calcite-block calcite-notice {
 
 .calcite-block-contents {
   width: calc(100% - 0.75rem);
-}
-
-::-webkit-scrollbar {
-  width: 0.75rem;
-  height: 8px;
-  background-color: var(--calcite-color-border-3);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--calcite-ui-brand);
 }
