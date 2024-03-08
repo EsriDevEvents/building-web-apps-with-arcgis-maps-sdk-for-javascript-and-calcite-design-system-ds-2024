@@ -58,16 +58,16 @@ calcite-shell {
 }
 
 .chip-year-2002 {
-  --calcite-color-brand: #e1cddb;
+  --calcite-color-brand: #b9d0bd;
   --calcite-color-text-inverse: black;
 }
 
 .chip-year-2003 {
-  --calcite-color-brand: #9fc1bd;
+  --calcite-color-brand: #bcd9da;
   --calcite-color-text-inverse: black;
 }
 
 .chip-year-2008 {
-  --calcite-color-brand: #ede8c5;
+  --calcite-color-brand: #ffe9d5;
   --calcite-color-text-inverse: black;
 }
