@@ -10,11 +10,6 @@
   padding: 0;
 }
 
-/* todo: make resizable */
-#viewDiv {
-  margin-left: 340px;
-}
-
 #campusViewDiv {
   pointer-events: none;
   height: 200px;
@@ -33,12 +28,8 @@
   max-width: 100%;
 }
 
-/* todo: make resizable */
 #custom-panel {
-  --calcite-panel-max-width: 340px;
-  --calcite-panel-min-width: 340px;
-  --calcite-shell-panel-max-width: 340px;
-  --calcite-shell-panel-min-width: 340px;
+  --calcite-shell-panel-width: 340px;
 }
 
 calcite-slider {
@@ -69,7 +60,6 @@ calcite-pagination {
   --calcite-color-brand-press: rgb(141, 0, 225);
 }
 
-/* todo: use calcite table */
 calcite-label span {
   font-weight: 500;
   text-align: end;
@@ -111,4 +101,10 @@ calcite-label span {
 
 calcite-flow {
   border-top: none;
+}
+
+@media screen and (max-width: 800px) {
+  #custom-panel {
+    --calcite-shell-panel-width: 240px;
+  }
 }

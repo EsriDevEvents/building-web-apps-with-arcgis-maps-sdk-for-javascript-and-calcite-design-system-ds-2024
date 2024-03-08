@@ -15,6 +15,8 @@ async function init() {
   // query for elements
   const rootShellNode = document.getElementById("root-shell");
   const resultsNode = document.getElementById("results");
+  const panelEndNode = document.getElementById("panel-end");
+  const filtersSheetNode = document.getElementById("filters-sheet");
   const attendanceNode = document.getElementById("attendance");
   const housingSectionNode = document.getElementById("housingSection");
   const housingNode = document.getElementById("housing");
@@ -27,6 +29,33 @@ async function init() {
   const flowNode = document.getElementById("flow");
   const themeNode = document.getElementById("toggle-mode");
   const darkModeCSS = document.getElementById("jsapi-mode-dark");
+  const customPanelNode = document.getElementById("custom-panel");
+  const viewDiv = document.getElementById("viewDiv");
+
+  const mediaQuery = window.matchMedia("screen and (max-width: 800px)");
+
+  const handleMediaQuery = (e) => {
+    filtersSheetNode.hidden = !e.matches;
+    panelEndNode.hidden = e.matches;
+
+    if (e.matches) {
+      filtersSheetNode.appendChild(filtersNode);
+      filtersSheetNode.open = !filtersNode.closed;
+    } else {
+      panelEndNode.appendChild(filtersNode);
+    }
+  };
+
+  mediaQuery.addEventListener("change", handleMediaQuery);
+  handleMediaQuery(mediaQuery);
+
+  const resizeObserver = new ResizeObserver(() => {
+    viewDiv.style.setProperty(
+      "margin-left",
+      `${customPanelNode.clientWidth}px`
+    );
+  });
+  resizeObserver.observe(customPanelNode);
 
   async function getAttachment(objectId, result) {
     const campusImageContainerNode = document.getElementById(
@@ -88,7 +117,9 @@ async function init() {
       return;
     }
 
-    filtersNode.hidden = true;
+    panelEndNode.hidden = true;
+    filtersAction.hidden = true;
+    filtersSheetNode.hidden = true;
     const attributes = result.attributes;
     const detailPanelNode = document.getElementById("detail-panel");
     // a janky way to replace content in a single panel vs appending entire new one each time
@@ -105,7 +136,9 @@ async function init() {
           appState.savedExtent = null;
         }
         appState.activeItem = false;
-        filtersNode.hidden = false;
+        filtersAction.hidden = false;
+        panelEndNode.hidden = false;
+        filtersSheetNode.hidden = false;
       });
 
       // Contain the calcite-block elements for the scrollbar
@@ -575,6 +608,23 @@ async function init() {
     }),
     "top-left"
   );
+
+  const filtersAction = document.createElement("calcite-action");
+  filtersAction.icon = "filter";
+  filtersAction.text = "Filters";
+  filtersAction.scale = "s";
+  filtersAction.hidden = true;
+  filtersAction.addEventListener("click", () => {
+    filtersAction.hidden = true;
+    filtersSheetNode.open = true;
+    filtersNode.closed = false;
+  });
+  view.ui.add(filtersAction, "top-right");
+  filtersNode.addEventListener("calcitePanelClose", () => {
+    filtersNode.closed = true;
+    filtersAction.hidden = false;
+    filtersSheetNode.open = false;
+  });
 
   view.ui.move("zoom", "top-left");
 

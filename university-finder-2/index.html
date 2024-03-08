@@ -48,7 +48,6 @@
       <calcite-tooltip placement="bottom" reference-element="toggle-modal" close-on-click slot="content-end">View code
         for this step</calcite-tooltip>
     </calcite-navigation>
-
     <calcite-shell class="calcite-presentation example-shell" content-behind id="example-shell">
       <calcite-navigation class="university-nav" slot="header">
         <calcite-navigation-logo slot="logo" icon="education" heading="UniversityFinder">
@@ -70,8 +69,8 @@
         <div id="viewDiv">
         </div>
       </calcite-shell-center-row>
-      <calcite-shell-panel id="filters" slot="panel-end" display-mode="float" height-scale="m">
-        <calcite-panel heading="Filters" collapsible>
+      <calcite-shell-panel id="panel-end" slot="panel-end" display-mode="float" height-scale="m">
+        <calcite-panel id="filters" heading="Filters" closable collapsible>
           <calcite-action id="reset" icon="reset" slot="header-actions-end" hidden></calcite-action>
           <calcite-block heading="Basics" open>
             <calcite-label>
@@ -104,6 +103,7 @@
           </calcite-block>
         </calcite-panel>
       </calcite-shell-panel>
+      <calcite-sheet slot="sheets" label="Filters" id="filters-sheet"></calcite-sheet>
     </calcite-shell>
   </calcite-shell>
 
