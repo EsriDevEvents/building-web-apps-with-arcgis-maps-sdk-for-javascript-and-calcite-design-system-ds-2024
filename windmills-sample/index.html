@@ -145,7 +145,7 @@
     <div slot="message">Welcome to beautiful Palm Springs!</div>
   </calcite-alert>
 
-  <calcite-modal id="modal">
+  <calcite-modal id="modal" width-scale="l">
     <div slot="header">About this application</div>
     <div slot="content">
       <calcite-notice open>
@@ -155,14 +155,18 @@
           Custom RenderNode - Animated Windmills
         </calcite-link>
       </calcite-notice>
-      This example illustrates using the Calcite Design System with the ArcGIS Maps SDK for JS.
-      <hr />
-      <calcite-link target="_blank"
-        href="https://github.com/EsriDevEvents/2024-building-web-apps-with-arcgis-maps-sdk-for-javascript-and-calcite-design-system">Application
-        source code</calcite-link>
-      is available in the
-      <calcite-link target="_blank" href="https://github.com/EsriDevEvents/">Esri Developer Events GitHub
-        organization</calcite-link>.
+
+
+      <!-- <esri-devsummit-code source="function createCorridorListItems() {
+        corridors.forEach(item => {
+          const listItem = document.createElement('calcite-list-item');
+          listItem.label=item;
+          listItem.selected = item === appState.corridors;
+          corridorListEl.append(listItem);
+        });
+      }"></esri-devsummit-code> -->
+
+
     </div>
   </calcite-modal>
 
