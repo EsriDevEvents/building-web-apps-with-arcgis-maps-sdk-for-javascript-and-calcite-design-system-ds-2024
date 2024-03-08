@@ -40,9 +40,34 @@ calcite-action-pad {
   margin-bottom: 1.25rem;
 }
 
-/* calcite-chip.custom-chip {
-  --calcite-color-foreground-2: #ffe9d5;
-} */
-
 /* Calcite Dev Summit 2024 Demo Template */
 /* Custom styles below */
+
+calcite-shell {
+  --calcite-ui-brand: #ffbe83;
+  --calcite-color-brand: #ffbe83;
+  --calcite-color-brand-hover: #ffe9d5;
+  --calcite-color-brand-press: #ffe9d5;
+}
+
+.calcite-mode-dark calcite-shell {
+  --calcite-ui-brand: #bcd9da;
+  --calcite-color-brand: #bcd9da;
+  --calcite-color-brand-hover: #b9d0bd;
+  --calcite-color-brand-press: #b9d0bd;
+}
+
+.chip-year-2002 {
+  --calcite-color-brand: #e1cddb;
+  --calcite-color-text-inverse: black;
+}
+
+.chip-year-2003 {
+  --calcite-color-brand: #9fc1bd;
+  --calcite-color-text-inverse: black;
+}
+
+.chip-year-2008 {
+  --calcite-color-brand: #ede8c5;
+  --calcite-color-text-inverse: black;
+}

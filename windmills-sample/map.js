@@ -19,9 +19,6 @@ import {
   debounce,
 } from "https://js.arcgis.com/4.29/@arcgis/core/core/promiseUtils.js";
 
-// todo: theming
-// todo: code blocks
-
 /*********************
  * Settings
  *********************/
@@ -207,7 +204,8 @@ function renderWindTurbines(turbines) {
 
     const chip = document.createElement("calcite-chip");
     chip.innerText = on_year;
-    chip.className = "custom-chip";
+    chip.kind = "brand";
+    chip.className = `custom-chip chip-year-${on_year}`;
     chip.icon = "calendar";
     chip.slot = "content-end";
     listItem.appendChild(chip);
@@ -862,7 +860,6 @@ const WindmillRenderNode = RenderNode.createSubclass({
    */
   setCommonUniforms() {
     const gl = this.gl;
-    const camera = this.camera;
 
     gl.uniform3fv(
       this.programUniformDirectionalColor,
@@ -876,7 +873,6 @@ const WindmillRenderNode = RenderNode.createSubclass({
       this.programUniformLightingDirection,
       this.sunLight.direction
     );
-
     gl.uniformMatrix4fv(
       this.programUniformProjectionMatrix,
       false,

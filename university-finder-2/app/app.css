@@ -47,19 +47,6 @@ calcite-pagination {
   justify-content: center;
 }
 
-.calcite-presentation {
-  --calcite-ui-brand: purple;
-  --calcite-color-brand: purple;
-  --calcite-color-brand-hover: rgb(94, 0, 94);
-  --calcite-color-brand-press: rgb(87, 0, 87);
-}
-
-.calcite-mode-dark .calcite-presentation {
-  --calcite-color-brand: rgb(125, 0, 209);
-  --calcite-color-brand-hover: rgb(121, 0, 205);
-  --calcite-color-brand-press: rgb(141, 0, 225);
-}
-
 calcite-label span {
   font-weight: 500;
   text-align: end;
@@ -107,4 +94,18 @@ calcite-flow {
   #custom-panel {
     --calcite-shell-panel-width: 240px;
   }
+}
+
+.calcite-presentation {
+  --calcite-ui-brand: purple;
+  --calcite-color-brand: purple;
+  --calcite-color-brand-hover: rgb(94, 0, 94);
+  --calcite-color-brand-press: rgb(87, 0, 87);
+}
+
+.calcite-mode-dark .calcite-presentation {
+  --calcite-ui-brand: rgb(125, 0, 209);
+  --calcite-color-brand: rgb(125, 0, 209);
+  --calcite-color-brand-hover: rgb(121, 0, 205);
+  --calcite-color-brand-press: rgb(141, 0, 225);
 }
