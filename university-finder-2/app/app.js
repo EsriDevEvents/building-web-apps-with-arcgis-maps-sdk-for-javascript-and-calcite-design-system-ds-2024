@@ -32,24 +32,6 @@ async function init() {
   const customPanelNode = document.getElementById("custom-panel");
   const viewDiv = document.getElementById("viewDiv");
 
-  const mediaQuery = window.matchMedia("screen and (max-width: 800px)");
-
-  // todo: move to filter open appState
-  const handleMediaQuery = (e) => {
-    filtersSheetNode.hidden = !e.matches;
-    panelEndNode.hidden = e.matches;
-
-    if (e.matches) {
-      filtersSheetNode.appendChild(filtersNode);
-      filtersSheetNode.open = !filtersNode.closed;
-    } else {
-      panelEndNode.appendChild(filtersNode);
-    }
-  };
-
-  mediaQuery.addEventListener("change", handleMediaQuery);
-  handleMediaQuery(mediaQuery);
-
   const resizeObserver = new ResizeObserver(() => {
     viewDiv.style.setProperty(
       "margin-left",
@@ -118,9 +100,7 @@ async function init() {
       return;
     }
 
-    panelEndNode.hidden = true;
-    filtersAction.hidden = true;
-    filtersSheetNode.hidden = true;
+    updateResponsiveUI();
     const attributes = result.attributes;
     const detailPanelNode = document.getElementById("detail-panel");
     // a janky way to replace content in a single panel vs appending entire new one each time
@@ -137,9 +117,7 @@ async function init() {
           appState.savedExtent = null;
         }
         appState.activeItem = false;
-        filtersAction.hidden = false;
-        panelEndNode.hidden = false;
-        filtersSheetNode.hidden = false;
+        updateResponsiveUI();
       });
 
       // Contain the calcite-block elements for the scrollbar
@@ -616,16 +594,35 @@ async function init() {
   filtersAction.scale = "s";
   filtersAction.hidden = true;
   filtersAction.addEventListener("click", () => {
-    filtersAction.hidden = true;
-    filtersSheetNode.open = true;
-    filtersNode.closed = false;
+    appState.filterOpen = true;
+    updateResponsiveUI();
   });
   view.ui.add(filtersAction, "top-right");
   filtersNode.addEventListener("calcitePanelClose", () => {
-    filtersNode.closed = true;
-    filtersAction.hidden = false;
-    filtersSheetNode.open = false;
+    appState.filterOpen = false;
+    updateResponsiveUI();
   });
+
+  const updateResponsiveUI = () => {
+    filtersAction.hidden = appState.activeItem || appState.filterOpen;
+    panelEndNode.hidden = appState.activeItem || appState.smallBreakpoint;
+    filtersSheetNode.hidden = appState.activeItem || !appState.smallBreakpoint;
+    filtersSheetNode.open = appState.filterOpen;
+    filtersNode.closed = !appState.filterOpen;
+  };
+
+  const mediaQuery = window.matchMedia("screen and (max-width: 800px)");
+
+  const handleMediaQuery = (e) => {
+    appState.smallBreakpoint = e.matches;
+    updateResponsiveUI();
+    appState.smallBreakpoint
+      ? filtersSheetNode.appendChild(filtersNode)
+      : panelEndNode.appendChild(filtersNode);
+  };
+
+  mediaQuery.addEventListener("change", handleMediaQuery);
+  handleMediaQuery(mediaQuery);
 
   view.ui.move("zoom", "top-left");
 
