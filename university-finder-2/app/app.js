@@ -34,6 +34,7 @@ async function init() {
 
   const mediaQuery = window.matchMedia("screen and (max-width: 800px)");
 
+  // todo: move to filter open appState
   const handleMediaQuery = (e) => {
     filtersSheetNode.hidden = !e.matches;
     panelEndNode.hidden = e.matches;
