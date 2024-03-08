@@ -7,6 +7,7 @@ import Legend from "https://js.arcgis.com/4.29/@arcgis/core/widgets/Legend.js";
 import Search from "https://js.arcgis.com/4.29/@arcgis/core/widgets/Search.js";
 import Expand from "https://js.arcgis.com/4.29/@arcgis/core/widgets/Expand.js";
 import { whenOnce } from "https://js.arcgis.com/4.29/@arcgis/core/core/reactiveUtils.js";
+import { debounce } from "https://js.arcgis.com/4.29/@arcgis/core/core/promiseUtils.js";
 
 import { appConfig } from "./config.js";
 import { appState } from "./state.js";
@@ -809,10 +810,12 @@ async function init() {
   // Reset button
   resetNode.addEventListener("click", () => resetFilters());
 
-  // View extent changes
-  view.watch("center", () => !appState.activeItem && queryItems());
+  const queryItemsDebounced = debounce(queryItems, 500);
 
-  queryItems();
+  // View extent changes
+  view.watch("center", () => !appState.activeItem && queryItemsDebounced());
+
+  queryItemsDebounced();
 }
 
 init();
