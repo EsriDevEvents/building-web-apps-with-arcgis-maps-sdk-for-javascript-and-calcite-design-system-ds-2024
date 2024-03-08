@@ -3,10 +3,7 @@
 const toggleModeEl = document.getElementById("toggle-mode");
 const toggleModalEl = document.getElementById("toggle-modal");
 
-const navigationEl = document.getElementById("nav");
-const panelEl = document.getElementById("sheet-panel");
 const modalEl = document.getElementById("modal");
-const sheetEl = document.getElementById("sheet");
 const darkModeCss = document.getElementById("jsapi-mode-dark");
 const lightModeCss = document.getElementById("jsapi-mode-light");
 
@@ -14,11 +11,6 @@ let mode = "light";
 
 toggleModeEl.addEventListener("click", () => handleModeChange());
 toggleModalEl.addEventListener("click", () => handleModalChange());
-navigationEl.addEventListener("calciteNavigationActionSelect", () =>
-  handleSheetOpen()
-);
-
-panelEl.addEventListener("calcitePanelClose", () => handlePanelClose());
 
 function handleModeChange() {
   mode = mode === "dark" ? "light" : "dark";
@@ -34,13 +26,4 @@ function handleModeChange() {
 
 function handleModalChange() {
   modalEl.open = !modalEl.open;
-}
-
-function handleSheetOpen() {
-  sheetEl.open = true;
-  panelEl.closed = false;
-}
-
-function handlePanelClose() {
-  sheetEl.open = false;
 }
