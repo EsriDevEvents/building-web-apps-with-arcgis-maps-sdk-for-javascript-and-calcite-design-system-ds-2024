@@ -51,5 +51,11 @@ calcite-shell {
   );
 }
 
+esri-devsummit-code {
+  margin: 15px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
 /* Calcite Dev Summit 2024 Demo Template */
 /* Custom styles below */

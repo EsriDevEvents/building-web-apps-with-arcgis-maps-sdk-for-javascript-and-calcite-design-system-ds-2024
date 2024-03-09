@@ -71,3 +71,9 @@ calcite-shell {
   --calcite-color-brand: #ffe9d5;
   --calcite-color-text-inverse: black;
 }
+
+esri-devsummit-code {
+  margin: 15px;
+  font-size: 18px;
+  line-height: 24px;
+}
