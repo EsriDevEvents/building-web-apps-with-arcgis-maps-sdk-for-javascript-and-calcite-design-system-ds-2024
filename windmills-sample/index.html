@@ -13,14 +13,7 @@
   <!-- Demo imports -->
   <script src="./app.js" defer></script>
   <link rel="stylesheet" href="./style.css" />
-
-  <link id="jsapi-mode-light" rel="stylesheet"
-    href="https://js.arcgis.com/4.29/@arcgis/core/assets/esri/themes/light/main.css" />
-  <link disabled id="jsapi-mode-dark" rel="stylesheet"
-    href="https://js.arcgis.com/4.29/@arcgis/core/assets/esri/themes/dark/main.css" />
-
-  <script src="https://js.arcgis.com/4.29/"></script>
-
+  <script type="module" src="../esri-devsummit/esri-devsummit.esm.js"></script>
   <style>
     html,
     body,
@@ -31,6 +24,13 @@
       width: 100%;
     }
   </style>
+
+  <!-- ArcGIS Maps SDK for JavaScript imports -->
+  <link id="jsapi-mode-light" rel="stylesheet"
+    href="https://js.arcgis.com/4.29/@arcgis/core/assets/esri/themes/light/main.css" />
+  <link disabled id="jsapi-mode-dark" rel="stylesheet"
+    href="https://js.arcgis.com/4.29/@arcgis/core/assets/esri/themes/dark/main.css" />
+  <script src="https://js.arcgis.com/4.29/"></script>
 
   <!-- A simple windmill model -->
   <script
@@ -66,7 +66,6 @@
   </script>
   <!-- Our application -->
   <script src="./map.js" type="module"></script>
-  <script type="module" src="../esri-devsummit/esri-devsummit.esm.js"></script>
 </head>
 
 <body>
