@@ -1,0 +1,111 @@
+.calcite-presentation {
+  scrollbar-color: var(--calcite-ui-brand) var(--calcite-color-border-3);
+}
+
+#campusViewDiv,
+#viewDiv {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#campusViewDiv {
+  pointer-events: none;
+  height: 200px;
+}
+
+.campus-image-container {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  background-color: var(--calcite-ui-background);
+  text-align: center;
+  height: 200px;
+}
+
+.campus-image-container img {
+  height: 200px;
+  max-width: 100%;
+}
+
+#custom-panel {
+  --calcite-shell-panel-width: 340px;
+}
+
+calcite-slider {
+  max-width: 90%;
+}
+
+calcite-card {
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  text-align: start;
+}
+
+calcite-pagination {
+  flex: 1;
+  justify-content: center;
+}
+
+calcite-label span {
+  font-weight: 500;
+  text-align: end;
+  max-width: 60%;
+}
+
+.item-button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: block;
+  width: 100%;
+  background: transparent;
+}
+
+.university-nav {
+  color: var(--calcite-color-brand);
+  --calcite-color-text-1: var(--calcite-color-brand);
+}
+
+.calcite-mode-dark .university-nav {
+  color: var(--calcite-color-text-1);
+  --calcite-color-text-1: var(--calcite-color-text-1);
+}
+
+.calcite-block-contents calcite-notice {
+  margin-block-end: 1rem;
+}
+
+#programType calcite-chip {
+  cursor: pointer;
+}
+
+.calcite-panel-contents {
+  overflow-y: auto;
+  display: block;
+  height: 100%;
+}
+
+calcite-flow {
+  border-top: none;
+}
+
+@media screen and (max-width: 800px) {
+  #custom-panel {
+    --calcite-shell-panel-width: 240px;
+  }
+}
+
+.calcite-presentation {
+  --calcite-ui-brand: purple;
+  --calcite-color-brand: purple;
+  --calcite-color-brand-hover: rgb(94, 0, 94);
+  --calcite-color-brand-press: rgb(87, 0, 87);
+}
+
+.calcite-mode-dark .calcite-presentation {
+  --calcite-ui-brand: rgb(125, 0, 209);
+  --calcite-color-brand: rgb(125, 0, 209);
+  --calcite-color-brand-hover: rgb(121, 0, 205);
+  --calcite-color-brand-press: rgb(141, 0, 225);
+}
