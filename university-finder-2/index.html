@@ -17,7 +17,7 @@
   <!-- Demo imports -->
   <script src="./demo/demo.js" defer></script>
   <link rel="stylesheet" href="./demo/demo.css" />
-  <script type="module" src="../esri-devsummit/esri-devsummit.esm.js"></script>
+  <script type="module" src="../esri-demo/esri-demo.esm.js"></script>
 
   <!-- App-->
   <link rel="stylesheet" href="./app/app.css" />
@@ -115,26 +115,26 @@
         <calcite-accordion-item expanded icon-start="code" heading="1. Add Calcite Component">
           <strong>Create a <calcite-chip scale="s">List Item</calcite-chip> for each corridor
             type.</strong>
-          <esri-devsummit-code source="function createCorridorListItems() {
+          <esri-demo-code source="function createCorridorListItems() {
   corridors.forEach(item => {
     const listItem = document.createElement('calcite-list-item');
     listItem.label=item;
     listItem.selected = item === appState.corridors;
     corridorListEl.append(listItem);
   });
-}"></esri-devsummit-code>
+}"></esri-demo-code>
         </calcite-accordion-item>
         <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component">
           <strong>Create a <calcite-chip scale="s">List Item</calcite-chip> for each corridor
             type.</strong>
-          <esri-devsummit-code source="function createCorridorListItems() {
+          <esri-demo-code source="function createCorridorListItems() {
   corridors.forEach(item => {
     const listItem = document.createElement('calcite-list-item');
     listItem.label=item;
     listItem.selected = item === appState.corridors;
     corridorListEl.append(listItem);
   });
-}"></esri-devsummit-code>
+}"></esri-demo-code>
         </calcite-accordion-item>
       </calcite-accordion>
     </div>
