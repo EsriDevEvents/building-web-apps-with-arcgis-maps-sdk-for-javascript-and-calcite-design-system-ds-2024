@@ -813,9 +813,12 @@ async function init() {
   const queryItemsDebounced = debounce(queryItems, 500);
 
   // View extent changes
-  view.watch("center", () => !appState.activeItem && queryItemsDebounced());
+  view.watch(
+    "center",
+    () => !appState.activeItem && queryItemsDebounced().catch(() => {})
+  );
 
-  queryItemsDebounced();
+  queryItemsDebounced().catch(() => {});
 }
 
 init();
