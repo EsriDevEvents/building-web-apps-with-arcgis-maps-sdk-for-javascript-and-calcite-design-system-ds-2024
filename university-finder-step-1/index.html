@@ -55,7 +55,7 @@
       </calcite-navigation>
       <calcite-shell-panel slot="panel-start" id="custom-panel">
         <calcite-flow id="flow">
-          <calcite-flow-item heading="Results" id="resultBlock" loading>
+          <calcite-flow-item heading="Results" id="resultBlock">
             <calcite-pagination id="pagination" slot="footer">
             </calcite-pagination>
             <div class="calcite-panel-contents">
@@ -71,39 +71,8 @@
       </calcite-shell-center-row>
       <calcite-shell-panel id="panel-end" slot="panel-end" display-mode="float" height-scale="m">
         <calcite-panel id="filters" heading="Filters" closable>
-          <calcite-action id="reset" icon="reset" slot="header-actions-end" hidden></calcite-action>
-          <calcite-block heading="Basics" open>
-            <calcite-label>
-              School type
-              <calcite-select id="schoolType">
-                <calcite-option value="all">All</calcite-option>
-              </calcite-select>
-            </calcite-label>
-            <calcite-label>
-              Highest degree offered
-              <calcite-chip-group scale="s" label="Program type" id="programType"></calcite-chip-group>
-              <div></div>
-            </calcite-label>
-            <calcite-label>
-              Enrollment range
-              <calcite-slider id="attendance" range label-handles min-value="0" max-value="160000" min="0" max="160000"
-                step="100">
-              </calcite-slider>
-            </calcite-label>
-          </calcite-block>
-          <calcite-block heading="Housing" open>
-            <calcite-block-section id="housingSection" text="Offers on campus housing" toggle-display="switch">
-              <calcite-label>
-                Dormitory capacity
-                <calcite-slider id="housing" range label-handles min-value="0" max-value="20000" min="0" max="20000"
-                  step="100">
-                </calcite-slider>
-              </calcite-label>
-            </calcite-block-section>
-          </calcite-block>
         </calcite-panel>
       </calcite-shell-panel>
-      <calcite-sheet slot="sheets" label="Filters" id="filters-sheet"></calcite-sheet>
     </calcite-shell>
   </calcite-shell>
 
