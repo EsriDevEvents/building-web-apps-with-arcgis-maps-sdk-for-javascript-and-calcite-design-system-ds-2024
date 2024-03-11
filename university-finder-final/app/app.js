@@ -33,14 +33,6 @@ async function init() {
   const customPanelNode = document.getElementById("custom-panel");
   const viewDiv = document.getElementById("viewDiv");
 
-  const resizeObserver = new ResizeObserver(() => {
-    viewDiv.style.setProperty(
-      "margin-left",
-      `${customPanelNode.clientWidth}px`
-    );
-  });
-  resizeObserver.observe(customPanelNode);
-
   async function getAttachment(objectId, result) {
     const campusImageContainerNode = document.getElementById(
       "campusImageContainer"
@@ -603,6 +595,14 @@ async function init() {
     appState.filterOpen = false;
     updateResponsiveUI();
   });
+
+  const resizeObserver = new ResizeObserver(() => {
+    viewDiv.style.setProperty(
+      "margin-left",
+      `${customPanelNode.clientWidth}px`
+    );
+  });
+  resizeObserver.observe(customPanelNode);
 
   const updateResponsiveUI = () => {
     filtersAction.hidden = appState.activeItem || appState.filterOpen;

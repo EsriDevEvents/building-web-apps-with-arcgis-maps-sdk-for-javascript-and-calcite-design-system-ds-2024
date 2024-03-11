@@ -14,16 +14,7 @@ async function init() {
   const rootShellNode = document.getElementById("root-shell");
   const themeNode = document.getElementById("toggle-mode");
   const darkModeCSS = document.getElementById("jsapi-mode-dark");
-  const customPanelNode = document.getElementById("custom-panel");
-  const viewDiv = document.getElementById("viewDiv");
 
-  const resizeObserver = new ResizeObserver(() => {
-    viewDiv.style.setProperty(
-      "margin-left",
-      `${customPanelNode.clientWidth}px`
-    );
-  });
-  resizeObserver.observe(customPanelNode);
   const map = new WebMap({
     portalItem: {
       id: appConfig.webmap,
