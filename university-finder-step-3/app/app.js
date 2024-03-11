@@ -106,7 +106,6 @@ async function init() {
           appState.savedExtent = null;
         }
         appState.activeItem = false;
-        updateResponsiveUI();
       });
 
       // Contain the calcite-block elements for the scrollbar
@@ -584,27 +583,16 @@ async function init() {
   filtersAction.hidden = true;
   filtersAction.addEventListener("click", () => {
     appState.filterOpen = true;
-    updateResponsiveUI();
   });
   view.ui.add(filtersAction, "top-right");
   filtersNode.addEventListener("calcitePanelClose", () => {
     appState.filterOpen = false;
-    updateResponsiveUI();
   });
-
-  const updateResponsiveUI = () => {
-    filtersAction.hidden = appState.activeItem || appState.filterOpen;
-    panelEndNode.hidden = appState.activeItem || appState.smallBreakpoint;
-    filtersSheetNode.hidden = appState.activeItem || !appState.smallBreakpoint;
-    filtersSheetNode.open = appState.filterOpen;
-    filtersNode.closed = !appState.filterOpen;
-  };
 
   const mediaQuery = window.matchMedia("screen and (max-width: 800px)");
 
   const handleMediaQuery = (e) => {
     appState.smallBreakpoint = e.matches;
-    updateResponsiveUI();
     appState.smallBreakpoint
       ? filtersSheetNode.appendChild(filtersNode)
       : panelEndNode.appendChild(filtersNode);
