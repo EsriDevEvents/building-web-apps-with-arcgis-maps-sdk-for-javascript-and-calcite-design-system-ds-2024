@@ -81,21 +81,36 @@
     <div slot="header">Code Steps</div>
     <div slot="content">
       <calcite-accordion selection-mode="single" scale="l">
-        <calcite-accordion-item expanded icon-start="code" heading="1. Add Calcite Component">
-          <strong>Create a <calcite-chip scale="s">List Item</calcite-chip> for each corridor
-            type.</strong>
-          <esri-demo-code language="html" source="function createCorridorListItems() {
-  corridors.forEach(item => {
-    const listItem = document.createElement('calcite-list-item');
-    listItem.label=item;
-    listItem.selected = item === appState.corridors;
-    corridorListEl.append(listItem);
-  });
-}"></esri-demo-code>
+        <calcite-accordion-item expanded icon-start="code" heading="1. Add HTML structure for the app"
+          description="Create the shell HTML elements needed for the calcite application" icon-start="code">
+          <esri-demo-code language="html" source="&lt;calcite-shell class=&quot;calcite-presentation example-shell&quot; content-behind id=&quot;example-shell&quot;&gt;
+
+  &lt;calcite-navigation class=&quot;university-nav&quot; slot=&quot;header&quot;&gt;
+    &lt;calcite-navigation-logo slot=&quot;logo&quot; icon=&quot;education&quot; heading=&quot;UniversityFinder&quot;&gt;&lt;/calcite-navigation-logo&gt;
+  &lt;/calcite-navigation&gt;
+
+  &lt;calcite-shell-panel slot=&quot;panel-start&quot; id=&quot;custom-panel&quot;&gt;
+    &lt;calcite-flow id=&quot;flow&quot;&gt;
+      &lt;calcite-flow-item heading=&quot;Results&quot; id=&quot;resultBlock&quot;&gt;
+        &lt;calcite-pagination id=&quot;pagination&quot; slot=&quot;footer&quot;&gt;&lt;/calcite-pagination&gt;
+        &lt;div class=&quot;calcite-panel-contents&quot;&gt;
+          &lt;calcite-block open id=&quot;results&quot;&gt;&lt;/calcite-block&gt;
+        &lt;/div&gt;
+      &lt;/calcite-flow-item&gt;
+    &lt;/calcite-flow&gt;
+  &lt;/calcite-shell-panel&gt;
+
+  &lt;calcite-shell-center-row height-scale=&quot;l&quot;&gt;
+    &lt;div id=&quot;viewDiv&quot;&gt;&lt;/div&gt;
+  &lt;/calcite-shell-center-row&gt;
+
+  &lt;calcite-shell-panel id=&quot;panel-end&quot; slot=&quot;panel-end&quot; display-mode=&quot;float&quot; height-scale=&quot;m&quot;&gt;
+    &lt;calcite-panel id=&quot;filters&quot; heading=&quot;Filters&quot; closable&gt;&lt;/calcite-panel&gt;
+  &lt;/calcite-shell-panel&gt;
+
+&lt;/calcite-shell&gt;"></esri-demo-code>
         </calcite-accordion-item>
         <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component">
-          <strong>Create a <calcite-chip scale="s">List Item</calcite-chip> for each corridor
-            type.</strong>
           <esri-demo-code language="html" source="function createCorridorListItems() {
   corridors.forEach(item => {
     const listItem = document.createElement('calcite-list-item');
