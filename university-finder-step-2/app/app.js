@@ -650,10 +650,12 @@ async function init() {
       // Clear the basemap, and use the firefly tile layer
       map.basemap = null;
       fireflyBasemap.visible = true;
+      collegeLayer.effect = "bloom(1.1, 1px, 13%)";
       rootShellNode.classList.add("calcite-mode-dark");
       themeNode.icon = "moon";
     } else {
       fireflyBasemap.visible = false; // Change firefly visibility for light mode
+      collegeLayer.effect = "";
       map.basemap = "gray-vector";
       rootShellNode.classList.remove("calcite-mode-dark");
       themeNode.icon = "brightness";
