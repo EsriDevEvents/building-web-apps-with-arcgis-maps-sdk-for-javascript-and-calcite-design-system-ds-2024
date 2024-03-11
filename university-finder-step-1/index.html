@@ -81,7 +81,7 @@
     <div slot="header">Code Steps</div>
     <div slot="content">
       <calcite-accordion selection-mode="single" scale="l">
-        <calcite-accordion-item expanded icon-start="code" heading="1. Add HTML structure for the app"
+        <calcite-accordion-item icon-start="code" heading="1. Add HTML structure for the app"
           description="Create the shell HTML elements needed for the calcite application" icon-start="code">
           <esri-demo-code language="html" source="&lt;calcite-shell class=&quot;calcite-presentation example-shell&quot; content-behind id=&quot;example-shell&quot;&gt;
 
@@ -110,15 +110,38 @@
 
 &lt;/calcite-shell&gt;"></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component">
-          <esri-demo-code language="html" source="function createCorridorListItems() {
-  corridors.forEach(item => {
-    const listItem = document.createElement('calcite-list-item');
-    listItem.label=item;
-    listItem.selected = item === appState.corridors;
-    corridorListEl.append(listItem);
-  });
-}"></esri-demo-code>
+        <calcite-accordion-item icon-start="brackets-curly" heading="2. Add Map + Widgets"
+          description="Create the Map and widgets on the view UI">
+          <esri-demo-code language="js" source="const map = new WebMap({
+  portalItem: {
+    id: appConfig.webmap,
+  },
+});
+
+const view = new MapView({
+  container: &quot;viewDiv&quot;,
+  map,
+  highlightOptions: {
+    fillOpacity: 0,
+    haloColor: &quot;#D0D0D0&quot;,
+  },
+});
+
+view.ui.add(
+  new Home({
+    view,
+  }),
+  &quot;top-left&quot;
+);
+view.ui.move(&quot;zoom&quot;, &quot;top-left&quot;);
+
+const search = new Search({
+  view,
+  resultGraphicEnabled: false,
+  popupEnabled: false,
+});
+
+//... Legend, Legend Expand"></esri-demo-code>
         </calcite-accordion-item>
       </calcite-accordion>
     </div>
