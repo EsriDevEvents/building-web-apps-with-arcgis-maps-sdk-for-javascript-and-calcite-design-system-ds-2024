@@ -146,6 +146,29 @@ const search = new Search({
 
 //... Legend, Legend Expand"></esri-demo-code>
         </calcite-accordion-item>
+        <calcite-accordion-item icon-start="palette" heading="3. Add mode toggle logic"
+          description="Configures app when toggling between light and dark mode">
+          <esri-demo-code language="js" source="themeNode.addEventListener(&quot;click&quot;, () =&gt; handleThemeChange());
+
+function handleThemeChange() {
+  appState.theme = appState.theme === &quot;dark&quot; ? &quot;light&quot; : &quot;dark&quot;;
+  darkModeCSS.disabled = !darkModeCSS.disabled;
+
+  if (appState.theme === &quot;dark&quot;) {
+    map.basemap = null; // Clear the basemap, and use the firefly tile layer
+    fireflyBasemap.visible = true;
+    collegeLayer.effect = &quot;bloom(1.1, 1px, 13%)&quot;;
+    rootShellNode.classList.add(&quot;calcite-mode-dark&quot;);
+    themeNode.icon = &quot;moon&quot;;
+  } else {
+    fireflyBasemap.visible = false; // Change firefly visibility for light mode
+    collegeLayer.effect = &quot;&quot;;
+    map.basemap = &quot;gray-vector&quot;;
+    rootShellNode.classList.remove(&quot;calcite-mode-dark&quot;);
+    themeNode.icon = &quot;brightness&quot;;
+  }
+}"></esri-demo-code>
+        </calcite-accordion-item>
       </calcite-accordion>
     </div>
   </calcite-modal>
