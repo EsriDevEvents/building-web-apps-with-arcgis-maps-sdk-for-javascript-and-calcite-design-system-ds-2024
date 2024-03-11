@@ -112,15 +112,45 @@
     <div slot="header">Code Steps</div>
     <div slot="content">
       <calcite-accordion selection-mode="single" scale="l">
-        <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component" description="">
-          <esri-demo-code language="html" source="function createCorridorListItems() {
-  corridors.forEach(item => {
-    const listItem = document.createElement('calcite-list-item');
-    listItem.label=item;
-    listItem.selected = item === appState.corridors;
-    corridorListEl.append(listItem);
-  });
-}"></esri-demo-code>
+        <calcite-accordion-item icon-start="code" heading="1. Populate filter panel with Calcite controls"
+          description="Add Calcite Component filter controls">
+          <esri-demo-code language="html" source="&lt;calcite-action id=&quot;reset&quot; icon=&quot;reset&quot; slot=&quot;header-actions-end&quot; hidden&gt;&lt;/calcite-action&gt;
+
+&lt;calcite-block heading=&quot;Basics&quot; open&gt;
+  &lt;calcite-label&gt;
+    School type
+    &lt;calcite-select id=&quot;schoolType&quot;&gt;
+      &lt;calcite-option value=&quot;all&quot;&gt;All&lt;/calcite-option&gt;
+    &lt;/calcite-select&gt;
+  &lt;/calcite-label&gt;
+
+  &lt;calcite-label&gt;
+    Highest degree offered
+    &lt;calcite-chip-group scale=&quot;s&quot; label=&quot;Program type&quot; id=&quot;programType&quot;&gt;&lt;/calcite-chip-group&gt;
+    &lt;div&gt;&lt;/div&gt;
+  &lt;/calcite-label&gt;
+
+  &lt;calcite-label&gt;
+    Enrollment range
+    &lt;calcite-slider id=&quot;attendance&quot; range label-handles min-value=&quot;0&quot; max-value=&quot;160000&quot; min=&quot;0&quot; max=&quot;160000&quot;
+      step=&quot;100&quot;&gt;
+    &lt;/calcite-slider&gt;
+  &lt;/calcite-label&gt;
+&lt;/calcite-block&gt;
+
+&lt;calcite-block heading=&quot;Housing&quot; open&gt;
+  &lt;calcite-block-section id=&quot;housingSection&quot; text=&quot;Offers on campus housing&quot; toggle-display=&quot;switch&quot;&gt;
+
+    &lt;calcite-label&gt;
+      Dormitory capacity
+      &lt;calcite-slider id=&quot;housing&quot; range label-handles min-value=&quot;0&quot; max-value=&quot;20000&quot; min=&quot;0&quot; max=&quot;20000&quot;
+        step=&quot;100&quot;&gt;
+      &lt;/calcite-slider&gt;
+    &lt;/calcite-label&gt;
+
+  &lt;/calcite-block-section&gt;
+&lt;/calcite-block&gt;
+"></esri-demo-code>
         </calcite-accordion-item>
         <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component" description="">
           <esri-demo-code language="html" source="function createCorridorListItems() {
