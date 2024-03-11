@@ -411,7 +411,7 @@ async function init() {
     housingNode.maxValue = appConfig.housing.max;
     appState.activeProgramTypes = [];
     [...document.querySelectorAll(`[data-type*="type"]`)].forEach(
-      (item) => (item.color = "grey")
+      (item) => (item.kind = "neutral")
     );
     appState.hasFilterChanges = false;
     queryItems();
