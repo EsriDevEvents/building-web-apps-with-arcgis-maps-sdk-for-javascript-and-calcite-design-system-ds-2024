@@ -392,38 +392,6 @@ async function init() {
     return where;
   }
 
-  function resetFilters() {
-    schoolTypeNode.value = appConfig.defaultSchoolType;
-    appState.attendance = { ...appConfig.attendance };
-    attendanceNode.minValue = appConfig.attendance.min;
-    attendanceNode.maxValue = appConfig.attendance.max;
-    appState.housing = { ...appConfig.housing };
-    housingSectionNode.open = appConfig.housing.enabled;
-    housingNode.minValue = appConfig.housing.min;
-    housingNode.maxValue = appConfig.housing.max;
-    appState.activeProgramTypes = [];
-    [...document.querySelectorAll(`[data-type*="type"]`)].forEach(
-      (item) => (item.kind = "neutral")
-    );
-    appState.hasFilterChanges = false;
-    queryItems();
-  }
-
-  function filterMap() {
-    if (!collegeLayerView) {
-      return;
-    }
-
-    const where = whereClause();
-
-    collegeLayerView.featureEffect = {
-      filter: {
-        where: where,
-      },
-      excludedEffect: "grayscale(80%) opacity(30%)",
-    };
-  }
-
   function displayNoResult() {
     const notice = document.createElement("calcite-notice");
     notice.open = true;

@@ -152,15 +152,139 @@
 &lt;/calcite-block&gt;
 "></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component" description="">
-          <esri-demo-code language="html" source="function createCorridorListItems() {
-  corridors.forEach(item => {
-    const listItem = document.createElement('calcite-list-item');
-    listItem.label=item;
-    listItem.selected = item === appState.corridors;
-    corridorListEl.append(listItem);
+        <calcite-accordion-item icon-start="browser-map" heading="2. Watch the view for changes"
+          description="When the view center chanes, query for data">
+          <esri-demo-code language="js"
+            source="view.watch(&quot;center&quot;, () =&gt; !appState.activeItem &amp;&amp; queryItems());"></esri-demo-code>
+        </calcite-accordion-item>
+        <calcite-accordion-item icon-start="query" heading="3. Query for features"
+          description="Query the colleges feature layer for data">
+          <esri-demo-code language="js" source="async function queryItems(start = 0) {
+
+  //...
+
+  resultBlockNode.loading = true;
+  const where = whereClause();
+
+  collegeLayerView.featureEffect = {
+    filter: {
+      where: where,
+    },
+    excludedEffect: &quot;grayscale(80%) opacity(30%)&quot;,
+  };
+
+  if (start === 0) {
+    appState.count = await collegeLayerView.queryFeatureCount({
+      geometry: view.extent.clone(),
+      where,
+    });
+    paginationNode.totalItems = appState.count;
+    paginationNode.startItem = 1;
+  }
+
+  paginationNode.hidden = appState.count &lt;= appConfig.pageNum;
+
+  const results = await collegeLayerView.queryFeatures({
+    start,
+    num: appConfig.pageNum,
+    geometry: view.extent.clone(),
+    where: whereClause(),
+    outFields: [...appConfig.collegeLayerOutFields, collegeLayer.objectIdField],
   });
+
+  resultBlockNode.loading = false;
+  resultBlockNode.description = `${appState.count} universities found within the map.`;
+
+  resultsNode.innerHTML = &quot;&quot;;
+  if (results.features.length) {
+    results.features.map((result) =&gt; displayResult(result));
+  } else {
+    displayNoResult();
+  }
 }"></esri-demo-code>
+        </calcite-accordion-item>
+        <calcite-accordion-item icon-start="access-string-results" heading="4. Display a list of results"
+          description="Render a list of colleges in the primary panel">
+          <esri-demo-code language="js" source="function displayResult(result) {
+  const attributes = result.attributes;
+  const itemButton = document.createElement(&quot;button&quot;);
+  itemButton.className = &quot;item-button&quot;;
+  const item = document.createElement(&quot;calcite-card&quot;);
+  itemButton.appendChild(item);
+
+  if (parseInt(attributes[&quot;DORM_CAP&quot;]) !== -999) {
+    const chip = document.createElement(&quot;calcite-chip&quot;);
+    chip.icon = &quot;locator&quot;;
+    chip.slot = &quot;footer-end&quot;;
+    chip.scale = &quot;s&quot;;
+    chip.innerText = &quot;Housing&quot;;
+    item.appendChild(chip);
+  }
+
+  const chipState = document.createElement(&quot;calcite-chip&quot;);
+  chipState.slot = &quot;footer-start&quot;;
+  chipState.scale = &quot;s&quot;;
+  chipState.icon = &quot;group&quot;;
+  chipState.innerText = attributes[&quot;sizeRange&quot;];
+  item.appendChild(chipState);
+
+  const title = document.createElement(&quot;span&quot;);
+  title.slot = &quot;title&quot;;
+  title.innerText = handleCasing(attributes[&quot;NAME&quot;]);
+
+  // ...
+
+  item.appendChild(title);
+  item.appendChild(subtitle);
+
+  itemButton.addEventListener(&quot;click&quot;, () =&gt;
+    resultClickHandler(result.attributes[collegeLayer.objectIdField])
+  );
+
+  resultsNode.appendChild(itemButton);
+}"></esri-demo-code>
+        </calcite-accordion-item>
+        <calcite-accordion-item icon-start="zoom-to-object" heading="5. Display and go to the selected feature"
+          description="When a college feature is clicked from the list or the map, navigate to the feature and display information in the panel">
+          <esri-demo-code language="js" source="async function resultClickHandler(objectId) {
+
+  // ...
+
+  const { features } = await collegeLayerView.queryFeatures({
+    returnGeometry: true,
+    outSpatialReference: view.spatialReference,
+    objectIds: [objectId],
+    outFields: appConfig.collegeLayerOutFields,
+  });
+
+  const result = features[0];
+
+  if (!result.geometry || !result.attributes) {
+    return;
+  }
+  const attributes = result.attributes;
+  const detailPanelNode = document.getElementById(&quot;detail-panel&quot;);
+
+  detailPanelNode.heading = handleCasing(attributes[&quot;NAME&quot;]);
+  detailPanelNode.description = `${handleCasing(attributes[&quot;CITY&quot;])}, ${
+    attributes[&quot;STATE&quot;]
+  }`;
+
+  document.getElementById(
+    &quot;detail-website-link&quot;
+  ).href = `http://${attributes[&quot;WEBSITE&quot;]}`;
+
+  //...
+
+  view.goTo(
+    {
+      center: [result.geometry.longitude, result.geometry.latitude],
+      zoom: 13,
+    },
+    { duration: 400 }
+  );
+}
+"></esri-demo-code>
         </calcite-accordion-item>
       </calcite-accordion>
     </div>
