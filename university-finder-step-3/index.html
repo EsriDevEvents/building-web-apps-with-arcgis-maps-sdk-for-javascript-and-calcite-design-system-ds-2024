@@ -111,25 +111,73 @@
   <calcite-modal id="modal" width-scale="l">
     <div slot="header">Code Steps</div>
     <div slot="content">
-      <calcite-accordion selection-mode="single" scale="l">
-        <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component" description="">
-          <esri-demo-code language="html" source="function createCorridorListItems() {
-  corridors.forEach(item => {
-    const listItem = document.createElement('calcite-list-item');
-    listItem.label=item;
-    listItem.selected = item === appState.corridors;
-    corridorListEl.append(listItem);
-  });
-}"></esri-demo-code>
+      <calcite-accordion scale="l">
+        <calcite-accordion-item icon-start="recurrence" heading="1. Adding events for calcite components"
+          description="Wiring up the calcite copmonents to interact with the map">
+          <esri-demo-code language="js" source="flowItem.addEventListener(&quot;calciteFlowItemBack&quot;, async () =&gt; {
+  if (appState.savedExtent) {
+    await view.goTo(appState.savedExtent);
+    appState.savedExtent = null;
+  }
+  appState.activeItem = false;
+});
+
+paginationNode.pageSize = appConfig.pageNum;
+paginationNode.startItem = 1;
+paginationNode.addEventListener(&quot;calcitePaginationChange&quot;, (event) =&gt; {
+  queryItems(event.target.startItem - 1);
+});
+
+attendanceNode.addEventListener(&quot;calciteSliderInput&quot;, (event) =&gt; {
+  appState.attendance.min = event.target.minValue;
+  appState.attendance.max = event.target.maxValue;
+  appState.hasFilterChanges = true;
+  filterMap();
+});
+
+function filterMap() {
+  if (!collegeLayerView) {
+    return;
+  }
+
+  const where = whereClause();
+
+  collegeLayerView.featureEffect = {
+    filter: {
+      where: where,
+    },
+    excludedEffect: &quot;grayscale(80%) opacity(30%)&quot;,
+  };
+}
+
+attendanceNode.addEventListener(&quot;calciteSliderChange&quot;, (event) =&gt; {
+  appState.attendance.min = event.target.minValue;
+  appState.attendance.max = event.target.maxValue;
+  appState.hasFilterChanges = true;
+  queryItems();
+});
+
+// ..."></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component" description="">
-          <esri-demo-code language="html" source="function createCorridorListItems() {
-  corridors.forEach(item => {
-    const listItem = document.createElement('calcite-list-item');
-    listItem.label=item;
-    listItem.selected = item === appState.corridors;
-    corridorListEl.append(listItem);
-  });
+        <calcite-accordion-item icon-start="code" heading="2. Resetting calcite components and the map filter"
+          description="When the reset button is clicked, go back to the defaults">
+          <esri-demo-code language="js" source="resetNode.addEventListener(&quot;click&quot;, () =&gt; resetFilters());
+
+function resetFilters() {
+  schoolTypeNode.value = appConfig.defaultSchoolType;
+  appState.attendance = { ...appConfig.attendance };
+  attendanceNode.minValue = appConfig.attendance.min;
+  attendanceNode.maxValue = appConfig.attendance.max;
+  appState.housing = { ...appConfig.housing };
+  housingSectionNode.open = appConfig.housing.enabled;
+  housingNode.minValue = appConfig.housing.min;
+  housingNode.maxValue = appConfig.housing.max;
+  appState.activeProgramTypes = [];
+  [...document.querySelectorAll(`[data-type*=&quot;type&quot;]`)].forEach(
+    (item) =&gt; (item.kind = &quot;neutral&quot;)
+  );
+  appState.hasFilterChanges = false;
+  queryItems();
 }"></esri-demo-code>
         </calcite-accordion-item>
       </calcite-accordion>

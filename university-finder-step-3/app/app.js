@@ -16,8 +16,6 @@ async function init() {
   // query for elements
   const rootShellNode = document.getElementById("root-shell");
   const resultsNode = document.getElementById("results");
-  const panelEndNode = document.getElementById("panel-end");
-  const filtersSheetNode = document.getElementById("filters-sheet");
   const attendanceNode = document.getElementById("attendance");
   const housingSectionNode = document.getElementById("housingSection");
   const housingNode = document.getElementById("housing");
@@ -588,18 +586,6 @@ async function init() {
   filtersNode.addEventListener("calcitePanelClose", () => {
     appState.filterOpen = false;
   });
-
-  const mediaQuery = window.matchMedia("screen and (max-width: 800px)");
-
-  const handleMediaQuery = (e) => {
-    appState.smallBreakpoint = e.matches;
-    appState.smallBreakpoint
-      ? filtersSheetNode.appendChild(filtersNode)
-      : panelEndNode.appendChild(filtersNode);
-  };
-
-  mediaQuery.addEventListener("change", handleMediaQuery);
-  handleMediaQuery(mediaQuery);
 
   view.ui.move("zoom", "top-left");
 

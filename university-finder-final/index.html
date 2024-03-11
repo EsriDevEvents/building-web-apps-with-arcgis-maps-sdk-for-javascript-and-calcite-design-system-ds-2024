@@ -111,26 +111,79 @@
   <calcite-modal id="modal" width-scale="l">
     <div slot="header">Code Steps</div>
     <div slot="content">
-      <calcite-accordion selection-mode="single" scale="l">
-        <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component" description="">
-          <esri-demo-code language="html" source="function createCorridorListItems() {
-  corridors.forEach(item => {
-    const listItem = document.createElement('calcite-list-item');
-    listItem.label=item;
-    listItem.selected = item === appState.corridors;
-    corridorListEl.append(listItem);
-  });
-}"></esri-demo-code>
+      <calcite-accordion scale="l">
+        <calcite-accordion-item icon-start="dimensions" heading="1. Add responsive app logic"
+          description="Update the visibility of components based on application breakpoint sizing">
+          <esri-demo-code language="js" source="const resizeObserver = new ResizeObserver(() =&gt; {
+  viewDiv.style.setProperty(
+    &quot;margin-left&quot;,
+    `${customPanelNode.clientWidth}px`
+  );
+});
+
+resizeObserver.observe(customPanelNode);
+
+const updateResponsiveUI = () =&gt; {
+  filtersAction.hidden = appState.activeItem || appState.filterOpen;
+  panelEndNode.hidden = appState.activeItem || appState.smallBreakpoint;
+  filtersSheetNode.hidden = appState.activeItem || !appState.smallBreakpoint;
+  filtersSheetNode.open = appState.filterOpen;
+  filtersNode.closed = !appState.filterOpen;
+};
+
+const mediaQuery = window.matchMedia(&quot;screen and (max-width: 800px)&quot;);
+
+const handleMediaQuery = (e) =&gt; {
+  appState.smallBreakpoint = e.matches;
+  updateResponsiveUI();
+  appState.smallBreakpoint
+    ? filtersSheetNode.appendChild(filtersNode)
+    : panelEndNode.appendChild(filtersNode);
+};
+
+mediaQuery.addEventListener(&quot;change&quot;, handleMediaQuery);
+handleMediaQuery(mediaQuery);"></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="code" heading="1. Add Calcite Component" description="">
-          <esri-demo-code language="html" source="function createCorridorListItems() {
-  corridors.forEach(item => {
-    const listItem = document.createElement('calcite-list-item');
-    listItem.label=item;
-    listItem.selected = item === appState.corridors;
-    corridorListEl.append(listItem);
-  });
-}"></esri-demo-code>
+        <calcite-accordion-item icon-start="palette" heading="2. Theme the application using CSS"
+          description="Using CSS custom properties to style the application">
+          <esri-demo-code language="css" source="@media screen and (max-width: 800px) {
+  #custom-panel {
+    --calcite-shell-panel-width: 240px;
+  }
+}
+
+.calcite-presentation {
+  --calcite-ui-brand: purple;
+  --calcite-color-brand: purple;
+  --calcite-color-brand-hover: rgb(94, 0, 94);
+  --calcite-color-brand-press: rgb(87, 0, 87);
+}
+
+.calcite-mode-dark .calcite-presentation {
+  --calcite-ui-brand: rgb(125, 0, 209);
+  --calcite-color-brand: rgb(125, 0, 209);
+  --calcite-color-brand-hover: rgb(121, 0, 205);
+  --calcite-color-brand-press: rgb(141, 0, 225);
+}
+
+.university-nav {
+  color: var(--calcite-color-brand);
+  --calcite-color-text-1: var(--calcite-color-brand);
+}
+
+.calcite-mode-dark .university-nav {
+  color: var(--calcite-color-text-1);
+  --calcite-color-text-1: var(--calcite-color-text-1);
+}
+
+.calcite-presentation {
+  scrollbar-color: var(--calcite-ui-brand) var(--calcite-color-border-3);
+}
+
+.campus-image-container {
+  background-color: var(--calcite-color-background);
+}
+"></esri-demo-code>
         </calcite-accordion-item>
       </calcite-accordion>
     </div>
