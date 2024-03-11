@@ -100,8 +100,6 @@ async function init() {
     if (!result.geometry || !result.attributes) {
       return;
     }
-
-    updateResponsiveUI();
     const attributes = result.attributes;
     const detailPanelNode = document.getElementById("detail-panel");
     // a janky way to replace content in a single panel vs appending entire new one each time
@@ -112,14 +110,6 @@ async function init() {
         attributes["STATE"]
       }`;
       flowItem.id = "detail-panel";
-      flowItem.addEventListener("calciteFlowItemBack", async () => {
-        if (appState.savedExtent) {
-          await view.goTo(appState.savedExtent);
-          appState.savedExtent = null;
-        }
-        appState.activeItem = false;
-        updateResponsiveUI();
-      });
 
       // Contain the calcite-block elements for the scrollbar
       const div = document.createElement("div");
@@ -594,37 +584,7 @@ async function init() {
   filtersAction.text = "Filters";
   filtersAction.scale = "s";
   filtersAction.hidden = true;
-  filtersAction.addEventListener("click", () => {
-    appState.filterOpen = true;
-    updateResponsiveUI();
-  });
   view.ui.add(filtersAction, "top-right");
-  filtersNode.addEventListener("calcitePanelClose", () => {
-    appState.filterOpen = false;
-    updateResponsiveUI();
-  });
-
-  const updateResponsiveUI = () => {
-    filtersAction.hidden = appState.activeItem || appState.filterOpen;
-    panelEndNode.hidden = appState.activeItem || appState.smallBreakpoint;
-    filtersSheetNode.hidden = appState.activeItem || !appState.smallBreakpoint;
-    filtersSheetNode.open = appState.filterOpen;
-    filtersNode.closed = !appState.filterOpen;
-  };
-
-  const mediaQuery = window.matchMedia("screen and (max-width: 800px)");
-
-  const handleMediaQuery = (e) => {
-    appState.smallBreakpoint = e.matches;
-    updateResponsiveUI();
-    appState.smallBreakpoint
-      ? filtersSheetNode.appendChild(filtersNode)
-      : panelEndNode.appendChild(filtersNode);
-  };
-
-  mediaQuery.addEventListener("change", handleMediaQuery);
-  handleMediaQuery(mediaQuery);
-
   view.ui.move("zoom", "top-left");
 
   const search = new Search({
@@ -694,47 +654,13 @@ async function init() {
   attendanceNode.minValue = appConfig.attendance.min;
   attendanceNode.maxValue = appConfig.attendance.max;
 
-  attendanceNode.addEventListener("calciteSliderInput", (event) => {
-    appState.attendance.min = event.target.minValue;
-    appState.attendance.max = event.target.maxValue;
-    appState.hasFilterChanges = true;
-    filterMap();
-  });
-
-  attendanceNode.addEventListener("calciteSliderChange", (event) => {
-    appState.attendance.min = event.target.minValue;
-    appState.attendance.max = event.target.maxValue;
-    appState.hasFilterChanges = true;
-    queryItems();
-  });
-
   // Housing
   housingSectionNode.open = appConfig.housing.enabled;
-
-  housingSectionNode.addEventListener("calciteBlockSectionToggle", (event) => {
-    appState.housing.enabled = event.target.open;
-    appState.hasFilterChanges = true;
-    queryItems();
-  });
 
   housingNode.min = appConfig.housing.min;
   housingNode.max = appConfig.housing.max;
   housingNode.minValue = appConfig.housing.min;
   housingNode.maxValue = appConfig.housing.max;
-
-  housingNode.addEventListener("calciteSliderInput", (event) => {
-    appState.housing.min = event.target.minValue;
-    appState.housing.max = event.target.maxValue;
-    appState.hasFilterChanges = true;
-    filterMap();
-  });
-
-  housingNode.addEventListener("calciteSliderChange", (event) => {
-    appState.housing.min = event.target.minValue;
-    appState.housing.max = event.target.maxValue;
-    appState.hasFilterChanges = true;
-    queryItems();
-  });
 
   // School type select
   for (const [key, value] of Object.entries(appConfig.schoolTypes)) {
@@ -743,10 +669,6 @@ async function init() {
     option.innerText = key;
     schoolTypeNode.appendChild(option);
   }
-  schoolTypeNode.addEventListener("calciteSelectChange", () => {
-    appState.hasFilterChanges = true;
-    queryItems();
-  });
 
   // Degree type chip select
   for (const [key, value] of Object.entries(appConfig.programTypes)) {
@@ -756,24 +678,7 @@ async function init() {
     chip.value = value;
     chip.scale = "s";
     chip.innerText = key;
-    chip.addEventListener("click", (event) =>
-      handleMultipleChipSelection(event, value)
-    );
     programTypeNode.appendChild(chip);
-  }
-
-  function handleMultipleChipSelection(event, value) {
-    let items = appState.activeProgramTypes;
-    if (!items.includes(value)) {
-      items.push(value);
-      event.target.kind = "brand";
-    } else {
-      items = items.filter((item) => item !== value);
-      event.target.kind = "neutral";
-    }
-    appState.activeProgramTypes = items;
-    appState.hasFilterChanges = true;
-    queryItems();
   }
 
   // handle theme swap
@@ -799,16 +704,6 @@ async function init() {
       appState.activeItem = false;
     }, 1000);
   }
-
-  // Pagination
-  paginationNode.pageSize = appConfig.pageNum;
-  paginationNode.startItem = 1;
-  paginationNode.addEventListener("calcitePaginationChange", (event) => {
-    queryItems(event.target.startItem - 1);
-  });
-
-  // Reset button
-  resetNode.addEventListener("click", () => resetFilters());
 
   const queryItemsDebounced = debounce(queryItems, 500);
 

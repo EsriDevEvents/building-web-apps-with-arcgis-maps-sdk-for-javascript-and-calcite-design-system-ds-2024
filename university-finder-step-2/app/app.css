@@ -1,7 +1,3 @@
-.calcite-presentation {
-  scrollbar-color: var(--calcite-ui-brand) var(--calcite-color-border-3);
-}
-
 #campusViewDiv,
 #viewDiv {
   height: 100%;
@@ -62,16 +58,6 @@ calcite-label span {
   background: transparent;
 }
 
-.university-nav {
-  color: var(--calcite-color-brand);
-  --calcite-color-text-1: var(--calcite-color-brand);
-}
-
-.calcite-mode-dark .university-nav {
-  color: var(--calcite-color-text-1);
-  --calcite-color-text-1: var(--calcite-color-text-1);
-}
-
 .calcite-block-contents calcite-notice {
   margin-block-end: 1rem;
 }
@@ -88,24 +74,4 @@ calcite-label span {
 
 calcite-flow {
   border-top: none;
-}
-
-@media screen and (max-width: 800px) {
-  #custom-panel {
-    --calcite-shell-panel-width: 240px;
-  }
-}
-
-.calcite-presentation {
-  --calcite-ui-brand: purple;
-  --calcite-color-brand: purple;
-  --calcite-color-brand-hover: rgb(94, 0, 94);
-  --calcite-color-brand-press: rgb(87, 0, 87);
-}
-
-.calcite-mode-dark .calcite-presentation {
-  --calcite-ui-brand: rgb(125, 0, 209);
-  --calcite-color-brand: rgb(125, 0, 209);
-  --calcite-color-brand-hover: rgb(121, 0, 205);
-  --calcite-color-brand-press: rgb(141, 0, 225);
 }
