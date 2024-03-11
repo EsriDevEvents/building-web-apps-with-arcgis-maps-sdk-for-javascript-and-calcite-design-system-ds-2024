@@ -89,7 +89,8 @@
       <calcite-panel id="main-panel" heading="Maps SDK for JS & Caclite" description="Showcased products">
         <calcite-action id="toggle-instructions" text="Instructions" icon="lightbulb"
           slot="header-actions-end"></calcite-action>
-        <calcite-tooltip placement="bottom" reference-element="toggle-instructions" slot="header-actions-end">This
+        <calcite-tooltip overlay-positioning="fixed" placement="right" reference-element="toggle-instructions"
+          slot="header-actions-end">This
           demonstration application showcases using
           the Calcite Design System to build a user interface that interacts with the ArcGIS Maps SDK for
           JS</calcite-tooltip>
@@ -191,7 +192,7 @@ turbines.forEach((turbine) =&gt; {
   listItem.label = `${site_name}: ${unique_id}`;
   listItem.description = `${manufac} - ${model}`;
   list.appendChild(listItem);
-  
+
 });"></esri-demo-code>
         </calcite-accordion-item>
         <calcite-accordion-item heading="3. List Item event" description="Using the list event to go to a windmill"
