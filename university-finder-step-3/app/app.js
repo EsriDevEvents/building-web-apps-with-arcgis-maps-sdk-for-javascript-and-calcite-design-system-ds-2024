@@ -100,8 +100,6 @@ async function init() {
     if (!result.geometry || !result.attributes) {
       return;
     }
-
-    updateResponsiveUI();
     const attributes = result.attributes;
     const detailPanelNode = document.getElementById("detail-panel");
     // a janky way to replace content in a single panel vs appending entire new one each time
