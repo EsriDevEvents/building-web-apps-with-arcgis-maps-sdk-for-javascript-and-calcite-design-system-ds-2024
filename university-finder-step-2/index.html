@@ -164,6 +164,7 @@
   //...
 
   resultBlockNode.loading = true;
+
   const where = whereClause();
 
   collegeLayerView.featureEffect = {
@@ -196,6 +197,7 @@
   resultBlockNode.description = `${appState.count} universities found within the map.`;
 
   resultsNode.innerHTML = &quot;&quot;;
+
   if (results.features.length) {
     results.features.map((result) =&gt; displayResult(result));
   } else {

@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+#viewDiv {
+  margin-left: 340px;
+}
+
 #campusViewDiv {
   pointer-events: none;
   height: 200px;
