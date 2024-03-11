@@ -156,31 +156,42 @@
         <calcite-accordion-item heading="1. Layout" description="The layout of the application"
           icon-start="group-layout-elements">
           <esri-demo-code language="html" source="&lt;calcite-shell&gt;
+
   &lt;calcite-navigation slot=&quot;header&quot;&gt;
     &lt;calcite-navigation-logo slot=&quot;logo&quot;&gt;
   &lt;/calcite-navigation&gt;
+
   &lt;calcite-shell-panel slot=&quot;panel-start&quot;&gt;
     &lt;calcite-panel&gt;
+
       &lt;calcite-block collapsible heading=&quot;Windmill Configuration&quot;&gt;&lt;/calcite-block&gt;
+
       &lt;calcite-block collapsible heading=&quot;Windmills&quot; description=&quot;A list of displayed windmills&quot;&gt;
         &lt;calcite-list&gt;&lt;/calcite-list&gt;
       &lt;/calcite-block&gt;
+
     &lt;/calcite-panel&gt;
   &lt;/calcite-shell-panel&gt;
+
   &lt;div id=&quot;viewDiv&quot;&gt;
+
 &lt;/calcite-shell&gt;"></esri-demo-code>
         </calcite-accordion-item>
         <calcite-accordion-item heading="2. Windmill list creation" description="Generating the list using calicte-list"
           icon-start="list">
           <esri-demo-code language="js" source="const list = document.getElementById(&quot;turbine-list&quot;);
+
 list.innerHTML = &quot;&quot;;
+
 turbines.forEach((turbine) =&gt; {
+
   const listItem = document.createElement(&quot;calcite-list-item&quot;);
   const { site_name, unique_id, manufac, model, on_year } =
     turbine.attributes;
   listItem.label = `${site_name}: ${unique_id}`;
   listItem.description = `${manufac} - ${model}`;
   list.appendChild(listItem);
+  
 });"></esri-demo-code>
         </calcite-accordion-item>
         <calcite-accordion-item heading="3. List Item event" description="Using the list event to go to a windmill"

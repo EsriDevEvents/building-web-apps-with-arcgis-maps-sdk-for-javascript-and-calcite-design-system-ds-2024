@@ -164,6 +164,7 @@ attendanceNode.addEventListener(&quot;calciteSliderChange&quot;, (event) =&gt; {
           <esri-demo-code language="js" source="resetNode.addEventListener(&quot;click&quot;, () =&gt; resetFilters());
 
 function resetFilters() {
+  // reset all filter elements to default values
   schoolTypeNode.value = appConfig.defaultSchoolType;
   appState.attendance = { ...appConfig.attendance };
   attendanceNode.minValue = appConfig.attendance.min;
