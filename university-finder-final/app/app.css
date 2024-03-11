@@ -69,6 +69,8 @@ calcite-label span {
   overflow-y: auto;
   display: block;
   height: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 calcite-flow {
@@ -81,13 +83,13 @@ calcite-flow {
   }
 }
 
-.calcite-presentation {
+.university-app-shell {
   --calcite-color-brand: purple;
   --calcite-color-brand-hover: rgb(94, 0, 94);
   --calcite-color-brand-press: rgb(87, 0, 87);
 }
 
-.calcite-mode-dark .calcite-presentation {
+.calcite-mode-dark .university-app-shell {
   --calcite-color-brand: rgb(125, 0, 209);
   --calcite-color-brand-hover: rgb(121, 0, 205);
   --calcite-color-brand-press: rgb(141, 0, 225);
@@ -103,7 +105,7 @@ calcite-flow {
   --calcite-color-text-1: var(--calcite-color-text-1);
 }
 
-.calcite-presentation {
+.university-app-shell {
   scrollbar-color: var(--calcite-color-brand) var(--calcite-color-border-3);
 }
 

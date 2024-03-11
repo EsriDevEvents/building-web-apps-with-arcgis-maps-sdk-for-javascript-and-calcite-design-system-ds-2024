@@ -48,7 +48,7 @@
       <calcite-tooltip placement="bottom" reference-element="toggle-modal" close-on-click slot="content-end">View code
         for this step</calcite-tooltip>
     </calcite-navigation>
-    <calcite-shell class="calcite-presentation example-shell" content-behind id="example-shell">
+    <calcite-shell class="university-app-shell example-shell" content-behind id="example-shell">
       <calcite-navigation class="university-nav" slot="header">
         <calcite-navigation-logo slot="logo" icon="education" heading="UniversityFinder">
         </calcite-navigation-logo>
@@ -152,15 +152,13 @@ handleMediaQuery(mediaQuery);"></esri-demo-code>
   }
 }
 
-.calcite-presentation {
-  --calcite-ui-brand: purple;
+.university-app-shell {
   --calcite-color-brand: purple;
   --calcite-color-brand-hover: rgb(94, 0, 94);
   --calcite-color-brand-press: rgb(87, 0, 87);
 }
 
-.calcite-mode-dark .calcite-presentation {
-  --calcite-ui-brand: rgb(125, 0, 209);
+.calcite-mode-dark .university-app-shell {
   --calcite-color-brand: rgb(125, 0, 209);
   --calcite-color-brand-hover: rgb(121, 0, 205);
   --calcite-color-brand-press: rgb(141, 0, 225);
@@ -176,14 +174,13 @@ handleMediaQuery(mediaQuery);"></esri-demo-code>
   --calcite-color-text-1: var(--calcite-color-text-1);
 }
 
-.calcite-presentation {
-  scrollbar-color: var(--calcite-ui-brand) var(--calcite-color-border-3);
+.university-app-shell {
+  scrollbar-color: var(--calcite-color-brand) var(--calcite-color-border-3);
 }
 
 .campus-image-container {
   background-color: var(--calcite-color-background);
-}
-"></esri-demo-code>
+}"></esri-demo-code>
         </calcite-accordion-item>
       </calcite-accordion>
     </div>

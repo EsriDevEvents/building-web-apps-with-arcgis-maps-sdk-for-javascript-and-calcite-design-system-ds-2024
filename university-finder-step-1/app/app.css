@@ -24,6 +24,8 @@ calcite-pagination {
   overflow-y: auto;
   display: block;
   height: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 calcite-flow {
