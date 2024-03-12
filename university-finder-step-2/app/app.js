@@ -7,7 +7,6 @@ import Legend from "https://js.arcgis.com/4.29/@arcgis/core/widgets/Legend.js";
 import Search from "https://js.arcgis.com/4.29/@arcgis/core/widgets/Search.js";
 import Expand from "https://js.arcgis.com/4.29/@arcgis/core/widgets/Expand.js";
 import { whenOnce } from "https://js.arcgis.com/4.29/@arcgis/core/core/reactiveUtils.js";
-import { debounce } from "https://js.arcgis.com/4.29/@arcgis/core/core/promiseUtils.js";
 
 import { appConfig } from "./config.js";
 import { appState } from "./state.js";
@@ -665,15 +664,10 @@ async function init() {
     }, 1000);
   }
 
-  const queryItemsDebounced = debounce(queryItems, 500);
-
   // View extent changes
-  view.watch(
-    "center",
-    () => !appState.activeItem && queryItemsDebounced().catch(() => {})
-  );
+  view.watch("center", () => !appState.activeItem && queryItems());
 
-  queryItemsDebounced().catch(() => {});
+  queryItems();
 }
 
 init();
