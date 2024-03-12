@@ -130,12 +130,7 @@ const view = new MapView({
   },
 });
 
-view.ui.add(
-  new Home({
-    view,
-  }),
-  &quot;top-left&quot;
-);
+view.ui.add( new Home({ view, }), &quot;top-left&quot;);
 view.ui.move(&quot;zoom&quot;, &quot;top-left&quot;);
 
 const search = new Search({

@@ -123,8 +123,8 @@
 
 resizeObserver.observe(primaryPanelNode); // observe the primary left panel width
 
+// 800px breakpoint for responsive sizing
 const mediaQuery = window.matchMedia(&quot;screen and (max-width: 800px)&quot;);
-
 mediaQuery.addEventListener(&quot;change&quot;, handleMediaQuery);
 
 const handleMediaQuery = (e) =&gt; {

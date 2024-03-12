@@ -234,7 +234,7 @@
   title.slot = &quot;title&quot;;
   title.innerText = handleCasing(attributes[&quot;NAME&quot;]);
 
-  // ... populate other elements
+  // ... create and populate other elements
 
   item.appendChild(title);
   item.appendChild(subtitle);
@@ -276,7 +276,7 @@
     &quot;detail-website-link&quot;
   ).href = `http://${attributes[&quot;WEBSITE&quot;]}`;
 
-  //...
+  //... update other detail elements
 
   view.goTo(
     {
