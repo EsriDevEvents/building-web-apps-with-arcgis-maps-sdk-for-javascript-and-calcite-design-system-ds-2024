@@ -109,10 +109,10 @@
 
   <!-- Demo template interactive elements -->
   <calcite-modal id="modal" width-scale="l">
-    <div slot="header">Code Steps</div>
+    <div slot="header">Code Snippets</div>
     <div slot="content">
       <calcite-accordion scale="l">
-        <calcite-accordion-item icon-start="code" heading="1. Populate filter panel with Calcite controls"
+        <calcite-accordion-item icon-start="code" heading="1. Populating the filter panel with Calcite controls"
           description="Add Calcite Component filter controls">
           <esri-demo-code language="html" source="&lt;calcite-action id=&quot;reset&quot; icon=&quot;reset&quot; slot=&quot;header-actions-end&quot; hidden&gt;&lt;/calcite-action&gt;
 
@@ -152,12 +152,12 @@
 &lt;/calcite-block&gt;
 "></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="browser-map" heading="2. Watch the view for changes"
+        <calcite-accordion-item icon-start="browser-map" heading="2. Watching the view for changes"
           description="When the view center chanes, query for data">
           <esri-demo-code language="js"
             source="view.watch(&quot;center&quot;, () =&gt; !appState.activeItem &amp;&amp; queryItems());"></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="query" heading="3. Query for features"
+        <calcite-accordion-item icon-start="query" heading="3. Querying for features"
           description="Query the colleges feature layer for data">
           <esri-demo-code language="js" source="async function queryItems(start = 0) {
 
@@ -205,7 +205,7 @@
   }
 }"></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="access-string-results" heading="4. Display a list of results"
+        <calcite-accordion-item icon-start="access-string-results" heading="4. Displaying a list of results"
           description="Render a list of colleges in the primary panel">
           <esri-demo-code language="js" source="function displayResult(result) {
   const attributes = result.attributes;
@@ -246,7 +246,7 @@
   resultsNode.appendChild(itemButton);
 }"></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="zoom-to-object" heading="5. Display and go to the selected feature"
+        <calcite-accordion-item icon-start="zoom-to-object" heading="5. Displaying and going to the selected feature"
           description="When a college feature is clicked from the list or the map, navigate to the feature and display information in the panel">
           <esri-demo-code language="js" source="async function resultClickHandler(objectId) {
 

@@ -79,10 +79,10 @@
 
   <!-- Demo template interactive elements -->
   <calcite-modal id="modal" width-scale="l">
-    <div slot="header">Code Steps</div>
+    <div slot="header">Code Snippets</div>
     <div slot="content">
       <calcite-accordion scale="l">
-        <calcite-accordion-item icon-start="code" heading="1. Add HTML structure for the app"
+        <calcite-accordion-item icon-start="code" heading="1. HTML structure for the app"
           description="Create the shell HTML elements needed for the calcite application" icon-start="code">
           <esri-demo-code language="html" source="&lt;calcite-shell class=&quot;university-app-shell example-shell&quot; content-behind id=&quot;example-shell&quot;&gt;
 
@@ -113,7 +113,7 @@
 
 &lt;/calcite-shell&gt;"></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="brackets-curly" heading="2. Add Map + Widgets"
+        <calcite-accordion-item icon-start="brackets-curly" heading="2. Map + Widgets"
           description="Create the Map and widgets on the view UI">
           <esri-demo-code language="js" source="const map = new WebMap({
   portalItem: {
@@ -141,7 +141,7 @@ const search = new Search({
 
 //... Legend, Legend Expand"></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="palette" heading="3. Add mode toggle logic"
+        <calcite-accordion-item icon-start="palette" heading="3. Toggling Light/Dark Mode"
           description="Configures app when toggling between light and dark mode">
           <esri-demo-code language="js" source="themeNode.addEventListener(&quot;click&quot;, () =&gt; handleThemeChange());
 

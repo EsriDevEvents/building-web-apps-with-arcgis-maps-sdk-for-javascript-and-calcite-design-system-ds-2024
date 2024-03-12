@@ -109,10 +109,10 @@
 
   <!-- Demo template interactive elements -->
   <calcite-modal id="modal" width-scale="l">
-    <div slot="header">Code Steps</div>
+    <div slot="header">Code Snippets</div>
     <div slot="content">
       <calcite-accordion scale="l">
-        <calcite-accordion-item icon-start="dimensions" heading="1. Add responsive app logic"
+        <calcite-accordion-item icon-start="dimensions" heading="1. Adding responsive app logic"
           description="Update the visibility of components based on application breakpoint sizing">
           <esri-demo-code language="js" source="const resizeObserver = new ResizeObserver(() =&gt; {
   viewDiv.style.setProperty(
@@ -145,7 +145,7 @@ const updateResponsiveUI = () =&gt; {
   filtersNode.closed = !appState.filterOpen;
 };"></esri-demo-code>
         </calcite-accordion-item>
-        <calcite-accordion-item icon-start="palette" heading="2. Theme the application using CSS"
+        <calcite-accordion-item icon-start="palette" heading="2. Theming the application"
           description="Using CSS custom properties to style the application">
           <esri-demo-code language="css" source="/* When the screen is less than 800px */
 @media screen and (max-width: 800px) {
