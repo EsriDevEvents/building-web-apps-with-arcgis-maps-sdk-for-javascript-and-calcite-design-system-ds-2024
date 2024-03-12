@@ -16,7 +16,7 @@ async function init() {
   // query for elements
   const rootShellNode = document.getElementById("root-shell");
   const resultsNode = document.getElementById("results");
-  const panelEndNode = document.getElementById("panel-end");
+  const filtersPanelNode = document.getElementById("panel-end");
   const filtersSheetNode = document.getElementById("filters-sheet");
   const attendanceNode = document.getElementById("attendance");
   const housingSectionNode = document.getElementById("housingSection");

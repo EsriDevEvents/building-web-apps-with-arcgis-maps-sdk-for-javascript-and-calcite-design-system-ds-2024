@@ -53,7 +53,7 @@
         <calcite-navigation-logo slot="logo" icon="education" heading="UniversityFinder">
         </calcite-navigation-logo>
       </calcite-navigation>
-      <calcite-shell-panel slot="panel-start" id="custom-panel">
+      <calcite-shell-panel slot="panel-start" id="primary-panel">
         <calcite-flow id="flow">
           <calcite-flow-item heading="Results" id="resultBlock" loading>
             <calcite-pagination id="pagination" slot="footer">
@@ -117,37 +117,38 @@
           <esri-demo-code language="js" source="const resizeObserver = new ResizeObserver(() =&gt; {
   viewDiv.style.setProperty(
     &quot;margin-left&quot;,
-    `${customPanelNode.clientWidth}px`
+    `${primaryPanelNode.clientWidth}px`
   );
 });
 
-resizeObserver.observe(customPanelNode);
-
-const updateResponsiveUI = () =&gt; {
-  filtersAction.hidden = appState.activeItem || appState.filterOpen;
-  panelEndNode.hidden = appState.activeItem || appState.smallBreakpoint;
-  filtersSheetNode.hidden = appState.activeItem || !appState.smallBreakpoint;
-  filtersSheetNode.open = appState.filterOpen;
-  filtersNode.closed = !appState.filterOpen;
-};
+resizeObserver.observe(primaryPanelNode); // observe the primary left panel width
 
 const mediaQuery = window.matchMedia(&quot;screen and (max-width: 800px)&quot;);
+
+mediaQuery.addEventListener(&quot;change&quot;, handleMediaQuery);
 
 const handleMediaQuery = (e) =&gt; {
   appState.smallBreakpoint = e.matches;
   updateResponsiveUI();
   appState.smallBreakpoint
     ? filtersSheetNode.appendChild(filtersNode)
-    : panelEndNode.appendChild(filtersNode);
+    : filtersPanelNode.appendChild(filtersNode);
 };
 
-mediaQuery.addEventListener(&quot;change&quot;, handleMediaQuery);
-handleMediaQuery(mediaQuery);"></esri-demo-code>
+handleMediaQuery(mediaQuery);
+
+const updateResponsiveUI = () =&gt; {
+  filtersAction.hidden = appState.activeItem || appState.filterOpen;
+  filtersPanelNode.hidden = appState.activeItem || appState.smallBreakpoint;
+  filtersSheetNode.hidden = appState.activeItem || !appState.smallBreakpoint;
+  filtersSheetNode.open = appState.filterOpen;
+  filtersNode.closed = !appState.filterOpen;
+};"></esri-demo-code>
         </calcite-accordion-item>
         <calcite-accordion-item icon-start="palette" heading="2. Theme the application using CSS"
           description="Using CSS custom properties to style the application">
           <esri-demo-code language="css" source="@media screen and (max-width: 800px) {
-  #custom-panel {
+  #primary-panel {
     --calcite-shell-panel-width: 240px;
   }
 }

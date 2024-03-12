@@ -27,7 +27,7 @@
   max-width: 100%;
 }
 
-#custom-panel {
+#primary-panel {
   --calcite-shell-panel-width: 340px;
 }
 
@@ -82,7 +82,7 @@ calcite-flow {
 }
 
 @media screen and (max-width: 800px) {
-  #custom-panel {
+  #primary-panel {
     --calcite-shell-panel-width: 240px;
   }
 }

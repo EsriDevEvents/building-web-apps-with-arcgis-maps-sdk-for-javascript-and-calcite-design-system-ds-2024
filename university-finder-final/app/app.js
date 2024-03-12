@@ -16,7 +16,7 @@ async function init() {
   // query for elements
   const rootShellNode = document.getElementById("root-shell");
   const resultsNode = document.getElementById("results");
-  const panelEndNode = document.getElementById("panel-end");
+  const filtersPanelNode = document.getElementById("panel-end");
   const filtersSheetNode = document.getElementById("filters-sheet");
   const attendanceNode = document.getElementById("attendance");
   const housingSectionNode = document.getElementById("housingSection");
@@ -30,7 +30,7 @@ async function init() {
   const flowNode = document.getElementById("flow");
   const themeNode = document.getElementById("toggle-mode");
   const darkModeCSS = document.getElementById("jsapi-mode-dark");
-  const customPanelNode = document.getElementById("custom-panel");
+  const primaryPanelNode = document.getElementById("primary-panel");
   const viewDiv = document.getElementById("viewDiv");
 
   async function getAttachment(objectId, result) {
@@ -599,14 +599,14 @@ async function init() {
   const resizeObserver = new ResizeObserver(() => {
     viewDiv.style.setProperty(
       "margin-left",
-      `${customPanelNode.clientWidth}px`
+      `${primaryPanelNode.clientWidth}px`
     );
   });
-  resizeObserver.observe(customPanelNode);
+  resizeObserver.observe(primaryPanelNode);
 
   const updateResponsiveUI = () => {
     filtersAction.hidden = appState.activeItem || appState.filterOpen;
-    panelEndNode.hidden = appState.activeItem || appState.smallBreakpoint;
+    filtersPanelNode.hidden = appState.activeItem || appState.smallBreakpoint;
     filtersSheetNode.hidden = appState.activeItem || !appState.smallBreakpoint;
     filtersSheetNode.open = appState.filterOpen;
     filtersNode.closed = !appState.filterOpen;
@@ -619,7 +619,7 @@ async function init() {
     updateResponsiveUI();
     appState.smallBreakpoint
       ? filtersSheetNode.appendChild(filtersNode)
-      : panelEndNode.appendChild(filtersNode);
+      : filtersPanelNode.appendChild(filtersNode);
   };
 
   mediaQuery.addEventListener("change", handleMediaQuery);
