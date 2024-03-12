@@ -147,7 +147,8 @@ const updateResponsiveUI = () =&gt; {
         </calcite-accordion-item>
         <calcite-accordion-item icon-start="palette" heading="2. Theme the application using CSS"
           description="Using CSS custom properties to style the application">
-          <esri-demo-code language="css" source="@media screen and (max-width: 800px) {
+          <esri-demo-code language="css" source="/* When the screen is less than 800px */
+@media screen and (max-width: 800px) {
   #primary-panel {
     --calcite-shell-panel-width: 240px;
   }
@@ -159,6 +160,7 @@ const updateResponsiveUI = () =&gt; {
   --calcite-color-brand-press: #005141;
 }
 
+/* Shell when in dark mode */
 .calcite-mode-dark .university-app-shell {
   --calcite-color-brand: #45c4ac;
   --calcite-color-brand-hover: #389c89;

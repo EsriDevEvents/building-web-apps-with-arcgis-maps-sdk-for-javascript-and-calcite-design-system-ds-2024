@@ -81,6 +81,7 @@ calcite-flow {
   border-top: none;
 }
 
+/* When the screen is less than 800px */
 @media screen and (max-width: 800px) {
   #primary-panel {
     --calcite-shell-panel-width: 240px;
@@ -93,6 +94,7 @@ calcite-flow {
   --calcite-color-brand-press: #005141;
 }
 
+/* Shell when in dark mode */
 .calcite-mode-dark .university-app-shell {
   --calcite-color-brand: #45c4ac;
   --calcite-color-brand-hover: #389c89;
